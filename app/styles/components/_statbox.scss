@@ -1,0 +1,14 @@
+/* @import this file */
+.stat-box{
+  text-align: center;
+  .title{
+    font-family:"Roboto", sans-serif;
+    text-transform: uppercase;
+  }
+
+  .stat{
+    font-size:56px;
+    font-family:"Dosis","Roboto Condensed","Helvetica",sans-serif;
+    font-weight: 300;
+  }
+}

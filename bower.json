@@ -1,0 +1,18 @@
+{
+  "name": "nabard",
+  "version": "0.0.1",
+  "dependencies": {
+    "sass-bootstrap": "*",
+    "font-awesome": "*",
+    "angular": "*",
+    "angular-resource": "*",
+    "angular-mocks": "*",
+    "angular-ui-router": "~0.2.13",
+    "angular-bootstrap": "*",
+    "jquery": "~2.1.2",
+    "modernizr": "*",
+    "requirejs": "*",
+    "ui-leaflet": "^2.0.0",
+    "leaflet-plugins": "^3.0.0"
+  }
+}

@@ -1,0 +1,26 @@
+$fa-font-path: '../bower_components/font-awesome/fonts';
+@import '../bower_components/font-awesome/scss/font-awesome';
+$icon-font-path: '../bower_components/sass-bootstrap/fonts/';
+@import '../bower_components/sass-bootstrap/lib/bootstrap';
+@import 'CSS:../bower_components/leaflet/dist/leaflet';
+@import 'custom_mixins.scss';
+
+
+@import "components/statbox";
+
+/* This is your main css file */
+.browsehappy {
+    margin: 0.2em 0;
+    background: #ccc;
+    color: #000;
+    padding: 0.2em 0;
+}
+/* remove this part below and start develop */
+
+body {
+    padding-top: 20px;
+    padding-bottom: 20px;
+  font-family: "Roboto","Helvetica","Helvetica Neue",sans-serif;
+    color:#5b6c6f;
+}
+
