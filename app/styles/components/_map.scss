@@ -1,0 +1,32 @@
+/* @import this file */
+.land
+{
+  fill: #e0eef5;
+  fill-opacity: 0.8;
+  stroke:#5b6c6f;
+  stroke-opacity: 1;
+  stroke-width:0.6;
+  transition: fill-opacity .4s ease;
+  transition-duration:500ms;
+  cursor: pointer;
+}
+.land.selected{
+  fill: #eab65d !important;
+  fill-opacity: 1;
+}
+.land:hover{
+
+  fill-opacity: 1;
+  transition-duration:500ms;
+  transition: fill-opacity .4s ease;
+}
+
+.map-tooltip{
+  background:rgba(0,0,0,0.8);
+  padding:5px 10px;
+  border-radius:3px;
+  color:#fff;
+  font-size:12px;
+
+
+}

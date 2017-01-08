@@ -9,7 +9,9 @@ require([
     'google-tile-leaflet-plugin',
     'home/home',
     'dashboard/dashboard',
-    'directives/statbox/statbox'
+    'directives/statbox/statbox',
+    'angular-chosen-localytics',
+    'angular-animate'
 ], function(angular) {
     'use strict';
 
@@ -25,7 +27,9 @@ require([
             'dashboardModule',
             'statboxModule',
             'nemLogging',
-            'ui-leaflet'
+            'ui-leaflet',
+            'localytics.directives',
+            'ngAnimate'
         ]).config(['$urlRouterProvider', '$provide', function($urlRouterProvider, $provide) {
             $urlRouterProvider.otherwise('/');
 

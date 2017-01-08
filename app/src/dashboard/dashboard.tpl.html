@@ -1,69 +1,121 @@
+
+<h1 class="text-center" style="font-family: 'Roboto Condensed',sans-serif">NABARD Fund Allotment </h1>
+<hr/>
 <div class="container">
     <div class="row">
         <div class="col-xs-6">
-            Funds : <span class="label label-info">AF &nbsp;&times;</span> <span
-                class="label label-info">GCF &nbsp;&times;</span>
+            Funds : <select chosen="{width:'500px'}" multiple ng-model="selectedFunds" ng-options="fund.name for fund in funds track by fund.shortName"
+                            placeholder-text-multiple="'No funds selected'">
+        </select>
         </div>
     </div>
+    </div>
     <hr/>
-    <div class="row">
+<div class="container">
+
+<div class="row">
         <div class="col-xs-3">
-            <statbox title="Projects" stat="27" stat-style="{'color':'rgb(45,81,118)'}"></statbox>
+            <statbox title="Projects" stat="stats.projects" stat-style="{'color':'rgb(45,81,118)'}"></statbox>
         </div>
         <div class="col-xs-3">
-            <statbox title="States" stat="16" stat-style="{'color':'rgb(65,147,162)'}"></statbox>
+            <statbox title="States" stat="stats.states" stat-style="{'color':'rgb(65,147,162)'}"></statbox>
         </div>
         <div class="col-xs-3">
-            <statbox title="Sanctioned" stat="'8m'" stat-style="{'color':'rgb(223,133,48)'}"></statbox>
+            <statbox title="Sanctioned" stat="stats.sanctioned" stat-style="{'color':'rgb(223,133,48)'}"></statbox>
         </div>
         <div class="col-xs-3">
-            <statbox title="Beneficiaries" stat="'19,785'" stat-style="{'color':'rgb(135,194,210)'}"></statbox>
+            <statbox title="Beneficiaries" stat="stats.beneficiaries" stat-style="{'color':'rgb(135,194,210)'}"></statbox>
         </div>
     </div>
 
     <br><br>
+    </div>
 
     <div class="row" style="border-top:1px solid #e0e0e0; border-bottom:1px solid #e0e0e0;">
-        <div class="col-sm-8">
+        <div class="col-sm-6">
             <div style=" width:100%; padding-left:60px;" ng-include="'src/dashboard/india-map.html'"></div>
         </div>
-        <div class="col-sm-4">
-            <!--
-            <table class="table">
+        <div class="col-sm-6">
+            <br>
+            <h4>
+                State-wise distribution of projects and funds
+            </h4>
+            <br>
+
+            <table class="table no-borders barchart-table">
                 <thead>
                 <th>State</th>
+                <th>
+                    Sanctioned
+                </th>
+                <th></th>
+                <th></th>
                 <th>Projects</th>
-                <th>Sanctioned</th>
+
                 </thead>
-                <tr>
-                    <td>Jharkhand</td>
-                    <td>$ 1.4m</td>
+                <tr class="animate-repeat" ng-repeat="state in stateData | filter:selectedState  | orderBy:'-projects'" ng-show="$index < 20">
+                    <td>{{state.name}}</td>
+                    <td>{{state.amount_sanctioned | currency:'$ ':0}}</td>
+                    <td class="bar bar-right text-right ">
+                        <uib-progressbar  value="(state.amount_sanctioned/maxSanctionedAmount)*100"></uib-progressbar>
+                    </td>
+                    <td class="bar bar-left" style="width:150px;">
+                        <uib-progressbar type="warning" value="state.projects/totalProjects*100"></uib-progressbar>
+
+                    </td>
                     <td>
-                        <uib-progressbar value="44"></uib-progressbar>
+                        {{state.projects}}
                     </td>
                 </tr>
-                <tr>
-                    <td>Karnataka</td>
-                    <td>$ 0.7m</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>West Bengal</td>
-                    <td>$ 320k</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>Tamil Nadu</td>
-                    <td>$ 1.4m</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>Punjab</td>
-                    <td>$ 1.4m</td>
-                    <td></td>
-                </tr>
+
             </table>
-            -->
+
+            <br>
+            <div class="state-view" ng-show="selectedState.id" style="border:1px solid #e0e0e0;">
+                <h2 class="text-center" style="background:#0096c5; color:#fff;margin-top:0; padding-top:10px; font-family: 'Roboto' sans-serif; padding-bottom:10px; border-bottom:1px solid #e0e0e0;">{{selectedState.name}}
+                <span class="pull-right small" style="color:#fff; cursor: pointer" ng-click="selectedState = {};">&times;&nbsp;&nbsp;&nbsp;</span></h2>
+
+                <table class="table">
+                    <thead>
+                    <th>Project Name</th>
+                    <th>Amount Sanctioned</th>
+                    <th>Beneficiaries</th>
+                    </thead>
+                    <tr>
+                        <td>Integrated Flood Management</td>
+                        <td>$ 1,998,000</td>
+                        <td>23,566</td>
+                    </tr>
+                    <tr>
+                        <td>Renewable Energy Investment Program</td>
+                        <td>$ 4,408,000</td>
+                        <td>7,566</td>
+                    </tr>
+                    <tr>
+                        <td>Private-equity in sustainable energy</td>
+                        <td>$ 3,098,000</td>
+                        <td>9,356</td>
+                    </tr>
+                    <tr>
+                        <td>Green Energy Access Program</td>
+                        <td>$ 4,998,000</td>
+                        <td>25,434</td>
+                    </tr>
+
+                    <tr>
+                        <td>Mango Orchards in Degraded Environment</td>
+                        <td>$ 3,998,000</td>
+                        <td>16,566</td>
+                    </tr>
+
+                    <tr>
+                        <td>Solar Energy Development Programme</td>
+                        <td>$ 9,448,000</td>
+                        <td>4,566</td>
+                    </tr>
+
+
+                </table>
+            </div>
         </div>
     </div>
-</div>

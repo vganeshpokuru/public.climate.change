@@ -3,10 +3,14 @@ $fa-font-path: '../bower_components/font-awesome/fonts';
 $icon-font-path: '../bower_components/sass-bootstrap/fonts/';
 @import '../bower_components/sass-bootstrap/lib/bootstrap';
 @import 'CSS:../bower_components/leaflet/dist/leaflet';
+@import 'CSS:../bower_components/chosen/chosen';
 @import 'custom_mixins.scss';
 
 
 @import "components/statbox";
+@import "components/map";
+@import "components/chosen";
+@import "components/barchart-table";
 
 /* This is your main css file */
 .browsehappy {
@@ -18,8 +22,8 @@ $icon-font-path: '../bower_components/sass-bootstrap/fonts/';
 /* remove this part below and start develop */
 
 body {
-    padding-top: 20px;
-    padding-bottom: 20px;
+    padding: 20px;
+
   font-family: "Roboto","Helvetica","Helvetica Neue",sans-serif;
     color:#5b6c6f;
 }
