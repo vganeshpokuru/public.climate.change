@@ -1,7 +1,7 @@
-<div class="stat-box">
+<div class="stat-box" ng-class="{'sm':(size == 'sm')}">
     <div class="title">
         {{title}}
     </div>
-    <div class="stat" ng-style="statStyle">{{stat}}</div>
+    <div class="stat" count-up end-val="stat" options="options" reanimate-on-click="false" ng-style="statStyle"></div>
     <div class="footer"></div>
 </div>

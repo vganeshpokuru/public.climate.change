@@ -15,6 +15,9 @@
     "ui-leaflet": "^2.0.0",
     "leaflet-plugins": "^3.0.0",
     "angular-chosen-localytics": "^1.5.1",
-    "angular-animate": "^1.6.1"
+    "angular-animate": "^1.6.1",
+    "countUp.js": "countup#^1.8.1",
+    "angular-chart.js": "^1.1.1",
+    "d3": "^4.4.3"
   }
 }

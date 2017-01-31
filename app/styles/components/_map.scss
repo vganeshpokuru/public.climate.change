@@ -1,18 +1,86 @@
 /* @import this file */
+
+.map-container{
+  border-top:1px solid #e0e0e0;
+  border-bottom:1px solid #e0e0e0;
+
+  .map-toolbar{
+    position:absolute; top:10px;
+    opacity:0;
+  }
+
+  .map-column{
+    -webkit-transition-duration: 500ms;
+    -moz-transition-duration: 500ms;
+    -ms-transition-duration: 500ms;
+    -o-transition-duration: 500ms;
+    transition-duration: 500ms;
+  }
+
+  &.state-selected{
+
+    .svg-container{
+      padding-left:0;
+      -webkit-transition-duration: 500ms;
+      -moz-transition-duration: 500ms;
+      -ms-transition-duration: 500ms;
+      -o-transition-duration: 500ms;
+      transition-duration: 500ms;
+    }
+
+    .map-column{
+      margin-left:0 !important;
+      -webkit-transition-duration: 500ms;
+      -moz-transition-duration: 500ms;
+      -ms-transition-duration: 500ms;
+      -o-transition-duration: 500ms;
+      transition-duration: 500ms;
+    }
+
+    .map-toolbar{
+      opacity:1;
+    }
+  }
+
+  .svg-container{
+    width:100%;
+    padding-left:90px;
+    -webkit-transition-duration: 500ms;
+    -moz-transition-duration: 500ms;
+    -ms-transition-duration: 500ms;
+    -o-transition-duration: 500ms;
+    transition-duration: 500ms;
+  }
+
+}
+
+
+
+#india-map{
+  //border:1px solid #ccc;
+  //background:#e8ede9;
+}
+
+#nation.state-selected{
+  .land{
+    fill-opacity:0.15;
+  }
+}
 .land
 {
   fill: #e0eef5;
-  fill-opacity: 0.8;
-  stroke:#5b6c6f;
+  fill-opacity: 1;
+  //stroke:#5b6c6f;
+  stroke:#fff;
   stroke-opacity: 1;
-  stroke-width:0.6;
+  stroke-width:1;
   transition: fill-opacity .4s ease;
   transition-duration:500ms;
   cursor: pointer;
 }
 .land.selected{
   fill: #eab65d !important;
-  fill-opacity: 1;
+  fill-opacity: 1 !important;
 }
 .land:hover{
 

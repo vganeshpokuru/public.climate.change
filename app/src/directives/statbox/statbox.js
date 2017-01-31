@@ -10,7 +10,8 @@ define(['angular'], function(angular) {
                     scope: {
                         title : "@",
                         stat : "=",
-                        statStyle : "="
+                        statStyle : "=",
+                        size:'@'
                     },
                     link: function(scope, element, attrs) {
 

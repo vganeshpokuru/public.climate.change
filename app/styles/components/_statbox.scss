@@ -11,4 +11,10 @@
     font-family:"Dosis","Roboto Condensed","Helvetica",sans-serif;
     font-weight: 300;
   }
+
+  &.sm{
+    .stat {
+      font-size: 40px;
+    }
+  }
 }

@@ -301,7 +301,7 @@ module.exports = function(grunt) {
         uglify: {
             dist: {
                 files: [{
-                    src: '<%= yeoman.dist %>/src/**/*.js', // source files mask
+                    src: ['<%= yeoman.dist %>/src/**/*.js','!<%= yeoman.dist %>/src/lib/*.js'], // source files mask
                     expand: true // allow dynamic building
                 }]
             }
@@ -329,7 +329,8 @@ module.exports = function(grunt) {
                         '{,*/}*.html',
                         'styles/fonts/{,*/}*.*',
                         'bower_components/sass-bootstrap/fonts/*.*',
-                        'bower_components/font-awesome/fonts/*.*'
+                        'bower_components/font-awesome/fonts/*.*',
+                        'data/*'
                     ]
                 }]
             },

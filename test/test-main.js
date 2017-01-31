@@ -37,6 +37,11 @@ requirejs.config({
         'google-tile-leaflet-plugin' : 'leaflet-plugins/GMTile',
         'chosen': '../bower_components/chosen/chosen.jquery',
         'angular-chosen-localytics': '../bower_components/angular-chosen-localytics/dist/angular-chosen.min',
+        'countup' : 'lib/countUp.js/dist/countUp',
+        'angular-countup' : 'lib/countUp.js/dist/angular-countUp',
+        'chart' : '../bower_components/chart.js/dist/Chart',
+        'angular-chartjs' : '../bower_components/angular-chart.js/dist/angular-chart',
+        'd3' : '../bower_components/d3/d3.min'
         /*--insert code tag--do not remove*/
     },
     shim: {
@@ -52,6 +57,8 @@ requirejs.config({
         'google-tile-leaflet-plugin':['ui-leaflet'],
         'chosen':['jquery'],
         'angular-chosen-localytics':['chosen','angular'],
+        'angular-countup':['angular','countup'],
+        'angular-chartjs' : ['angular','chart']
 
 
     },

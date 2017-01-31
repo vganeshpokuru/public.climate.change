@@ -1,0 +1,158 @@
+
+<div class="container" id="top-level-stats" style="background:#fff;">
+
+    <div class="row">
+        <div class="col-xs-3">
+            <statbox title="Projects" stat="stats.projects" ></statbox>
+        </div>
+        <div class="col-xs-3">
+            <statbox title="States" stat="stats.states" ></statbox>
+        </div>
+        <div class="col-xs-3">
+            <statbox title="Sanctioned" stat="stats.sanctioned" ></statbox>
+        </div>
+        <div class="col-xs-3">
+            <statbox title="Beneficiaries" stat="stats.beneficiaries"></statbox>
+        </div>
+    </div>
+
+    <br>
+
+</div>
+
+        <div class="map-container" id="india-map-container">
+
+            <div class="row">
+                <div class="col-sm-6 col-sm-offset-3 map-column" >
+                    <div class="map-toolbar">
+                        <button class="btn btn-circle btn-default" ng-click="zoomOutMap(this)"><span class="glyphicon glyphicon-home"></span></button>
+                    </div>
+
+                    <div class="svg-container"  ng-include="'src/dashboard/india-map.html'"></div>
+                </div>
+                <div class="col-sm-6" ng-if="selectedState.name">
+                    <div class="text-center">
+                        <br><br><br>
+                        <h1 class="text-primary">{{selectedState.name}}</h1>
+                        <br>
+
+                        <div class="row" style="border-top:1px solid #f0f0f0; border-bottom:1px solid #f0f0f0; padding:10px 0;">
+                            <div class="col-sm-4">
+                                <statbox title="Projects" size="sm" stat="selectedState.projects" ></statbox>
+                            </div>
+                            <div class="col-sm-4">
+                                <statbox title="Sanctioned" size="sm" stat="selectedState.amount_sanctioned" ></statbox>
+                            </div>
+                            <div class="col-sm-4">
+                                <statbox title="Beneficiaries" size="sm" stat="selectedState.beneficiaries.total" ></statbox>
+                            </div>
+                        </div>
+
+
+                        <br>
+                        <h3 style="font-weight: 100">Projects in {{selectedState.name}}</h3>
+
+                        <br>
+
+                        <div class="row">
+                            <div class="col-xs-10 col-xs-offset-1">
+                                <table class="table text-left no-top-border">
+                                    <tr>
+                                        <td>
+                                            &RightAngleBracket;&RightAngleBracket;
+                                        </td>
+                                        <td>
+                                            <a href="./">Renewable resources funding</a>
+                                        </td>
+                                        <td>
+                                            $ 980,000
+                                        </td>
+                                        <td>
+                                            <span class="label label-info label-pill">Agriculture</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            &RightAngleBracket;&RightAngleBracket;
+                                        </td>
+                                        <td>
+                                            <a href="./">Integrated Flood Management</a>
+                                        </td>
+                                        <td>
+                                            $ 450,000
+                                        </td>
+                                        <td>
+                                            <span class="label label-info label-pill">Water</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            &RightAngleBracket;&RightAngleBracket;
+                                        </td>
+                                        <td>
+                                            <a href="./">Solar Energy Funding</a>
+                                        </td>
+                                        <td>
+                                            $ 980,000
+                                        </td>
+                                        <td>
+                                            <span class="label label-info label-pill">Agriculture</span>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+
+
+
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-4" style="padding:60px 0 0 0">
+
+                <h3>Fund Distribution - States</h3>
+                <p>A view of state-wise distribution of funds allocated in different projects</p>
+
+            </div>
+            <div class="col-sm-6 col-sm-offset-1 ">
+                <br>
+                <canvas id="bar" class="chart chart-bar" style="width:400px; margin:auto;"
+                        chart-data="data" chart-labels="labels" chart-series="series" chart-dataset-override="datasets">
+                </canvas>
+            </div>
+        </div>
+    </div>
+
+
+</section>
+<hr/>
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6 col-sm-offset-1 ">
+                <br>
+                <canvas id="radar" class="chart chart-radar"
+                        chart-data="radar_data" chart-options="options" chart-labels="radar_labels">
+                </canvas>
+            </div>
+            <div class="col-sm-4 col-sm-offset-1" style="padding:130px 0 0 0">
+
+                <h3>Fund Distribution - Sectors</h3>
+                <p>A view of sector-wise distribution of funds allocated in different projects</p>
+
+            </div>
+
+        </div>
+    </div>
+
+
+</section>
+

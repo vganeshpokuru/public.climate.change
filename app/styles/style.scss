@@ -7,10 +7,12 @@ $icon-font-path: '../bower_components/sass-bootstrap/fonts/';
 @import 'custom_mixins.scss';
 
 
+@import "components/dashboard";
 @import "components/statbox";
 @import "components/map";
 @import "components/chosen";
 @import "components/barchart-table";
+
 
 /* This is your main css file */
 .browsehappy {
@@ -22,9 +24,23 @@ $icon-font-path: '../bower_components/sass-bootstrap/fonts/';
 /* remove this part below and start develop */
 
 body {
-    padding: 20px;
+  padding: 20px;
 
   font-family: "Roboto","Helvetica","Helvetica Neue",sans-serif;
     color:#5b6c6f;
+}
+
+h1,h2,h3,h4,h5,h6{
+  font-family: "Oxygen","Roboto Condensed",sans-serif;
+}
+section{
+  padding : 15px 0;
+
+}
+
+.btn.btn-circle{
+  border-radius:50%;
+  height:40px;
+  width:40px;
 }
 

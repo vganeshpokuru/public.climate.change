@@ -11,7 +11,10 @@ require([
     'dashboard/dashboard',
     'directives/statbox/statbox',
     'angular-chosen-localytics',
-    'angular-animate'
+    'angular-animate',
+    'countup',
+    'angular-countup',
+    'angular-chartjs',
 ], function(angular) {
     'use strict';
 
@@ -29,7 +32,9 @@ require([
             'nemLogging',
             'ui-leaflet',
             'localytics.directives',
-            'ngAnimate'
+            'ngAnimate',
+            'countUpModule',
+            'chart.js',
         ]).config(['$urlRouterProvider', '$provide', function($urlRouterProvider, $provide) {
             $urlRouterProvider.otherwise('/');
 

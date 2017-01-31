@@ -1,0 +1,30 @@
+[
+    {
+        "name" : "Agriculture",
+        "code" : "agriculture"
+    },
+    {
+        "name" : "Water",
+        "code" : "water"
+    },
+    {
+        "name" : "Coastal Resources",
+        "code" : "coastal"
+    },
+    {
+        "name" : "Fisheries",
+        "code" : "fisheries"
+    },
+    {
+        "name" : "Livestock Management",
+        "code" : "livestock"
+    },
+    {
+        "name" : "Renewable Energy",
+        "code" : "renewable"
+    },
+    {
+        "name" : "Forestry",
+        "code" : "forestry"
+    }
+]
