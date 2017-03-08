@@ -15,6 +15,7 @@ require([
     'countup',
     'angular-countup',
     'angular-chartjs',
+    'datatableParserService/datatableParserService'
 ], function(angular) {
     'use strict';
 
@@ -35,6 +36,7 @@ require([
             'ngAnimate',
             'countUpModule',
             'chart.js',
+            'datatableParserModule'
         ]).config(['$urlRouterProvider', '$provide', function($urlRouterProvider, $provide) {
             $urlRouterProvider.otherwise('/');
 

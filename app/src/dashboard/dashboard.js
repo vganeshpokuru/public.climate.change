@@ -1,5 +1,5 @@
-define(['angular','d3', 'angular-ui-router','resources/resources'], function (angular,d3) {
-    angular.module('dashboardModule', ['ui.router','resourcesModule']).config(['$stateProvider', function ($stateProvider) {
+define(['angular','d3', 'angular-ui-router','resources/resources','datatableParserService/datatableParserService'], function (angular,d3) {
+    angular.module('dashboardModule', ['ui.router','resourcesModule','datatableParserModule']).config(['$stateProvider', function ($stateProvider) {
         /*config path for dashboard module*/
         $stateProvider.state('dashboard', {
             url: '/',
@@ -12,12 +12,14 @@ define(['angular','d3', 'angular-ui-router','resources/resources'], function (an
         '$timeout',
         '$filter',
         'ResourcesService',
-        function ($scope, $location,$timeout,$filter,resource) {
+        'DatatableParserService',
+        function ($scope, $location,$timeout,$filter,resource,datatableParserService) {
+
 
             //Load funds
             $scope.funds = [];
-            resource.Master.funds.query(function(response){
-                $scope.funds = response;
+            resource.Master.funds.get(function(response){
+                $scope.funds = datatableParserService.parse(response);
             },function(error){
                 console.error('Error while loading funds', error);
             });
@@ -44,7 +46,7 @@ define(['angular','d3', 'angular-ui-router','resources/resources'], function (an
 
             var blues = ["#96D0DF","#85BFCE","#6Ea6BE","#6199B1","#5E8ca4","#58748A"],
                 greens= ["#c7e9c0","#a1d99b","#74c476","#41ab5d","#238b45","#006d2c","#00441b"],
-                multiHues = ["#CFF3D2", "#AEE2C7", "#91D1BE", "#78BFB6", "#62ACAF", "#509AA9", "#4186A4", "#3573A0", "#2A5F9C", "#1F4B99"],
+                multiHues = ["#CFF3D2", "#AEE2C7", "#91D1BE", "#78BFB6", "#62ACAF", "#509AA9", "#4186A4", "#3573A0"],
                 multiHues2 = ["#FFE39F", "#D6D7A1", "#B3C9A2", "#93B8A2", "#77A7A2", "#6097A1", "#4C84A0", "#3A719E", "#2B5E9C", "#1F4B99"];
 
 
@@ -90,11 +92,31 @@ define(['angular','d3', 'angular-ui-router','resources/resources'], function (an
 
                 for (var i = 0, x = indianStates.length; i < x; i++) {
                     var state = indianStates[i];
-                    $scope[state.id.replace('IN-','').toLowerCase()+'Style'] = {fill : multiHues[Math.ceil(blues.length*(state.projects/_maxProjects))-1]};
+                    $scope[state.id.replace('IN-','').toLowerCase()+'Style'] = {fill : multiHues[Math.ceil(multiHues.length*(state.projects/_maxProjects))-1]};
                 }
 
                 init();
                 _initBarChart();
+
+                //Adding the legend
+                setTimeout(function(){
+                    var svg = d3.select('svg#india-map');
+                    var height = svg.style('height').replace("px", "");
+                    var g = svg.append('g').attr('id','legend');
+                    var ls_h=20, ls_w = 20;
+                    height = height-ls_h;
+                    var colorLength = multiHues.length;
+                    for(var i=0; i<colorLength;i++){
+                        g.append('rect').attr('x',5).attr('y',height - i*ls_h).attr('width',ls_w).attr('height',ls_h).style('fill',multiHues[colorLength-i-1]);
+                    }
+                    g.append('rect').attr('x',5).attr('y',height - i*ls_h).attr('width',ls_w).attr('height',ls_h).style('fill','#e0eef5');
+                    console.log(height);
+                    g.append('text').attr('x',10+ls_w).attr('y',height+ls_h).text('>= '+_maxProjects+' Projects')
+                    g.append('text').attr('x',10+ls_w).attr('y',height - ls_h*(colorLength-0.5)).text('No Projects')
+                },1000);
+
+
+
 
 
             },function(error){
@@ -151,6 +173,13 @@ define(['angular','d3', 'angular-ui-router','resources/resources'], function (an
             var centered;
             //Handling Map Clicks
             var init = function(){
+
+                console.log('initing');
+
+
+
+
+
                 var _lastSelected = null,
                     _body = $('body');
 
@@ -243,7 +272,6 @@ define(['angular','d3', 'angular-ui-router','resources/resources'], function (an
             $scope.series = ['Fund Allocation'];
             $scope.data = [[]];
             var _initBarChart = function(){
-                console.log($scope.states);
                 var labels = [];
                 var data = [];
                 for (var i = 0, x = $scope.stateData.length; i < x; i++) {

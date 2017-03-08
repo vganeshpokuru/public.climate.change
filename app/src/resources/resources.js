@@ -9,7 +9,7 @@ define(['angular'], function(angular) {
 
                 return {
                     Master: {
-                        funds: $resource(baseUrl + '/funds.json'),
+                        funds: $resource(baseUrl + '/funds_datatable.json'),
                         sectors : $resource(baseUrl + '/sectors.json'),
 
                     },
