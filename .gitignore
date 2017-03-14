@@ -12,3 +12,4 @@ node_modules
 .tmp
 dist
 dist.zip
+*app/bower_components*
