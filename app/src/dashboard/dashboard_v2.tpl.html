@@ -57,48 +57,21 @@
                         <div class="row">
                             <div class="col-xs-10 col-xs-offset-1">
                                 <table class="table text-left no-top-border">
-                                    <tr>
+                                    <tr ng-repeat="project in selectedState.projectsData">
                                         <td>
                                             &RightAngleBracket;&RightAngleBracket;
                                         </td>
                                         <td>
-                                            <a href="./">Renewable resources funding</a>
+                                            <a href="./">{{project.projectshortname}}</a>
                                         </td>
                                         <td>
-                                            $ 980,000
+                                           {{project.amount_sanctioned | currency:'$ '}}
                                         </td>
                                         <td>
-                                            <span class="label label-info label-pill">Agriculture</span>
+                                            <span class="label label-info label-pill">{{project.projectcategory | capitalize:true}}</span>
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td>
-                                            &RightAngleBracket;&RightAngleBracket;
-                                        </td>
-                                        <td>
-                                            <a href="./">Integrated Flood Management</a>
-                                        </td>
-                                        <td>
-                                            $ 450,000
-                                        </td>
-                                        <td>
-                                            <span class="label label-info label-pill">Water</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            &RightAngleBracket;&RightAngleBracket;
-                                        </td>
-                                        <td>
-                                            <a href="./">Solar Energy Funding</a>
-                                        </td>
-                                        <td>
-                                            $ 980,000
-                                        </td>
-                                        <td>
-                                            <span class="label label-info label-pill">Agriculture</span>
-                                        </td>
-                                    </tr>
+
                                 </table>
                             </div>
                         </div>

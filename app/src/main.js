@@ -15,7 +15,8 @@ require([
     'countup',
     'angular-countup',
     'angular-chartjs',
-    'datatableParserService/datatableParserService'
+    'datatableParserService/datatableParserService',
+    'capitalize/capitalize'
 ], function(angular) {
     'use strict';
 
@@ -36,7 +37,8 @@ require([
             'ngAnimate',
             'countUpModule',
             'chart.js',
-            'datatableParserModule'
+            'datatableParserModule',
+            'capitalizeModule'
         ]).config(['$urlRouterProvider', '$provide', function($urlRouterProvider, $provide) {
             $urlRouterProvider.otherwise('/');
 

@@ -1,0 +1,66 @@
+{"columnHeaders": [
+    {
+        "columnName": "projectId",
+        "columnType": "BIGINT",
+        "columnDisplayType": "INTEGER",
+        "isColumnNullable": false,
+        "isColumnPrimaryKey": false,
+        "columnValues": [],
+        "visibilityCriteria": []
+    },
+    {
+        "columnName": "projectcategory",
+        "columnType": "VARCHAR",
+        "columnDisplayType": "STRING",
+        "isColumnNullable": false,
+        "isColumnPrimaryKey": false,
+        "columnValues": [],
+        "visibilityCriteria": []
+    },
+    {
+        "columnName": "projectshortname",
+        "columnType": "VARCHAR",
+        "columnDisplayType": "STRING",
+        "isColumnNullable": false,
+        "isColumnPrimaryKey": false,
+        "columnValues": [],
+        "visibilityCriteria": []
+    },
+    {
+        "columnName": "projectcost",
+        "columnType": "DECIMAL",
+        "columnDisplayType": "DECIMAL",
+        "isColumnNullable": false,
+        "isColumnPrimaryKey": false,
+        "columnValues": [],
+        "visibilityCriteria": []
+    },
+    {
+        "columnName": "releasedamount",
+        "columnType": "DECIMAL",
+        "columnDisplayType": "DECIMAL",
+        "isColumnNullable": false,
+        "isColumnPrimaryKey": false,
+        "columnValues": [],
+        "visibilityCriteria": []
+    },
+    {
+        "columnName": "benificieries",
+        "columnType": "DECIMAL",
+        "columnDisplayType": "DECIMAL",
+        "isColumnNullable": false,
+        "isColumnPrimaryKey": false,
+        "columnValues": [],
+        "visibilityCriteria": []
+    }
+], "data": [
+    {
+        "row": ["1", "energy", "Conservation and Management of Coastal Resources", "10000000.000000", "0.000000", "0"]
+    },
+    {
+        "row": ["2", "energy", "Enhancing Adaptive Capacity and increasing Resilience of Small and Marginal Farmers", "2500000.000000", "1696000.000000", "290400"]
+    },
+    {
+        "row": ["3", "energy", "water front", "300000.000000", "0.000000", "280000"]
+    }
+]}

@@ -135,6 +135,11 @@ define(['angular','d3', 'angular-ui-router','resources/resources','datatablePars
                 return _stateWiseDataMap[stateId.replace('IN-','').toLowerCase()];
             };
             var _updateStats= function(data){
+
+                resource.States.projects.get({R_accountNo:data.id},function(response){
+                    $scope.selectedState.projectsData = datatableParserService.parse(response);
+                });
+
                 $scope.stats.projects = data.projects;
                 $scope.stats.states = 1;
                 $scope.stats.beneficiaries = (data.projects/_maxProjects)*Math.round(10000+Math.random()*30000);
