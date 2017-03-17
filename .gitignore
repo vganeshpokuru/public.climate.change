@@ -13,3 +13,4 @@ node_modules
 dist
 dist.zip
 *app/bower_components*
+!app/src/lib**
