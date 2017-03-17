@@ -17,7 +17,7 @@ define(['angular'], function(angular) {
                       all :   $resource(baseUrl + '/allProjects.json')
                     },
                     States : {
-                        all : $resource(baseUrl + '/states.json'),
+                        all : $resource(baseUrl + '/states_datatables.json'),
                         projects : $resource(baseUrl +'/stateprojects_datatables.json')
                     }
 

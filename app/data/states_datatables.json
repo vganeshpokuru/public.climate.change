@@ -1,409 +1,57 @@
-{
-    "projects" : 89,
-    "num_states" : 17,
-    "amount_sanctioned" : 67678000,
-    "beneficiaries" : {
-        "total" : 4505550,
-        "men" : 2505550,
-        "women" : 2500000
+{"columnHeaders": [
+    {
+        "columnName": "statename",
+        "columnType": "VARCHAR",
+        "columnDisplayType": "STRING",
+        "isColumnNullable": false,
+        "isColumnPrimaryKey": false,
+        "columnValues": [],
+        "visibilityCriteria": []
     },
-    "states" : [
-        {
-            "id": "IN-AN",
-            "name" : "Andaman & Nicobar",
-            "projects": 4,
-            "amount_sanctioned": 4340000,
-            "beneficiaries" : {
-                "total" : 4505550,
-                "men" : 2505550,
-                "women" : 2500000
-            }
-        },
-        {
-            "id": "IN-AP",
-            "name" : "Andhra Pradesh",
-            "projects": 3,
-            "amount_sanctioned": 5280000,
-            "beneficiaries" : {
-                "total" : 4505550,
-                "men" : 2505550,
-                "women" : 2500000
-            }
-        },
-        {
-            "id": "IN-AR",
-            "name" : "Arunachal Pradesh",
-            "projects": 2,
-            "amount_sanctioned": 6276000,
-            "beneficiaries" : {
-                "total" : 4505550,
-                "men" : 2505550,
-                "women" : 2500000
-            }
-        },
-        {
-            "id": "IN-AS",
-            "name" : "Assam",
-            "projects": 6,
-            "amount_sanctioned": 35465000,
-            "beneficiaries" : {
-                "total" : 4505550,
-                "men" : 2505550,
-                "women" : 2500000
-            }
-        },
-        {
-            "id": "IN-BR",
-            "name" : "Bihar",
-            "projects": 1,
-            "amount_sanctioned": 2563000,
-            "beneficiaries" : {
-                "total" : 4505550,
-                "men" : 2505550,
-                "women" : 2500000
-            }
-        },
-        {
-            "id": "IN-CH",
-            "name" : "Chandigarh",
-            "projects": 2,
-            "amount_sanctioned": 1738000,
-            "beneficiaries" : {
-                "total" : 4505550,
-                "men" : 2505550,
-                "women" : 2500000
-            }
-        },
-        {
-            "id": "IN-CT",
-            "name" : "Chhattisgarh",
-            "projects": 4,
-            "amount_sanctioned": 4276000,
-            "beneficiaries" : {
-                "total" : 4505550,
-                "men" : 2505550,
-                "women" : 2500000
-            }
-        },
-        {
-            "id": "IN-DD",
-            "name" : "Daman & Diu",
-            "projects": 6,
-            "amount_sanctioned": 3276000,
-            "beneficiaries" : {
-                "total" : 4505550,
-                "men" : 2505550,
-                "women" : 2500000
-            }
-        },
-        {
-            "id": "IN-DL",
-            "name" : "Delhi",
-            "projects": 3,
-            "amount_sanctioned": 7764000,
-            "beneficiaries" : {
-                "total" : 4505550,
-                "men" : 2505550,
-                "women" : 2500000
-            }
-        },
-        {
-            "id": "IN-DN",
-            "name" : "DN",
-            "projects": 5,
-            "amount_sanctioned": 8746000,
-            "beneficiaries" : {
-                "total" : 4505550,
-                "men" : 2505550,
-                "women" : 2500000
-            }
-        },
-        {
-            "id": "IN-GA",
-            "name" : "Goa",
-            "projects": 2,
-            "amount_sanctioned": 9847000,
-            "beneficiaries" : {
-                "total" : 4505550,
-                "men" : 2505550,
-                "women" : 2500000
-            }
-        },
-        {
-            "id": "IN-GJ",
-            "name" : "Gujrat",
-            "projects": 0,
-            "amount_sanctioned": 0,
-            "beneficiaries" : {
-                "total" : 4505550,
-                "men" : 2505550,
-                "women" : 2500000
-            }
-        },
-        {
-            "id": "IN-HP",
-            "name" : "Himachal Pradesh",
-            "projects": 2,
-            "amount_sanctioned": 2736000,
-            "beneficiaries" : {
-                "total" : 4505550,
-                "men" : 2505550,
-                "women" : 2500000
-            }
-        },
-        {
-            "id": "IN-HR",
-            "name" : "Haryana",
-            "projects": 0,
-            "amount_sanctioned": 0,
-            "beneficiaries" : {
-                "total" : 4505550,
-                "men" : 2505550,
-                "women" : 2500000
-            }
-        },
-        {
-            "id": "IN-JH",
-            "name" : "Jharkhand",
-            "projects": 1,
-            "amount_sanctioned": 232000,
-            "beneficiaries" : {
-                "total" : 4505550,
-                "men" : 2505550,
-                "women" : 2500000
-            }
-        },
-        {
-            "id": "IN-JK",
-            "name" : "Jammu & Kashmir",
-            "projects": 3,
-            "amount_sanctioned": 1241000,
-            "beneficiaries" : {
-                "total" : 4505550,
-                "men" : 2505550,
-                "women" : 2500000
-            }
-        },
-        {
-            "id": "IN-KA",
-            "name" : "Karnataka",
-            "projects": 0,
-            "amount_sanctioned": 0,
-            "beneficiaries" : {
-                "total" : 4505550,
-                "men" : 2505550,
-                "women" : 2500000
-            }
-        },
-        {
-            "id": "IN-KL",
-            "name" : "Kerala",
-            "projects": 3,
-            "amount_sanctioned": 4234000,
-            "beneficiaries" : {
-                "total" : 4505550,
-                "men" : 2505550,
-                "women" : 2500000
-            }
-        },
-        {
-            "id": "IN-LD",
-            "name" : "Lakshdweep",
-            "projects": 0,
-            "amount_sanctioned": 0,
-            "beneficiaries" : {
-                "total" : 4505550,
-                "men" : 2505550,
-                "women" : 2500000
-            }
-        },
-        {
-            "id": "IN-MH",
-            "name" : "Maharashtra",
-            "projects": 0,
-            "amount_sanctioned": 0,
-            "beneficiaries" : {
-                "total" : 4505550,
-                "men" : 2505550,
-                "women" : 2500000
-            }
-        },
-        {
-            "id": "IN-ML",
-            "name" : "Meghalaya",
-            "projects": 0,
-            "amount_sanctioned": 0,
-            "beneficiaries" : {
-                "total" : 4505550,
-                "men" : 2505550,
-                "women" : 2500000
-            }
-        },
-        {
-            "id": "IN-MN",
-            "name" : "Manipur",
-            "projects": 2,
-            "amount_sanctioned": 413000,
-            "beneficiaries" : {
-                "total" : 4505550,
-                "men" : 2505550,
-                "women" : 2500000
-            }
-        },
-        {
-            "id": "IN-MP",
-            "name" : "Madhya Pradesh",
-            "projects": 3,
-            "amount_sanctioned": 234000,
-            "beneficiaries" : {
-                "total" : 4505550,
-                "men" : 2505550,
-                "women" : 2500000
-            }
-        },
-        {
-            "id": "IN-MZ",
-            "name" : "Mizoram",
-            "projects": 1,
-            "amount_sanctioned": 423000,
-            "beneficiaries" : {
-                "total" : 4505550,
-                "men" : 2505550,
-                "women" : 2500000
-            }
-        },
-        {
-            "id": "IN-NL",
-            "name" : "Nagaland",
-            "projects": 0,
-            "amount_sanctioned": 0,
-            "beneficiaries" : {
-                "total" : 4505550,
-                "men" : 2505550,
-                "women" : 2500000
-            }
-        },
-        {
-            "id": "IN-OR",
-            "name" : "Odisha",
-            "projects": 2,
-            "amount_sanctioned": 6453000,
-            "beneficiaries" : {
-                "total" : 4505550,
-                "men" : 2505550,
-                "women" : 2500000
-            }
-        },
-        {
-            "id": "IN-PB",
-            "name" : "Punjab",
-            "projects": 3,
-            "amount_sanctioned": 4234000,
-            "beneficiaries" : {
-                "total" : 4505550,
-                "men" : 2505550,
-                "women" : 2500000
-            }
-        },
-        {
-            "id": "IN-PY",
-            "name" : "Pondichery",
-            "projects": 5,
-            "amount_sanctioned": 5456000,
-            "beneficiaries" : {
-                "total" : 4505550,
-                "men" : 2505550,
-                "women" : 2500000
-            }
-        },
-        {
-            "id": "IN-RJ",
-            "name" : "Rajasthan",
-            "projects": 2,
-            "amount_sanctioned": 234000,
-            "beneficiaries" : {
-                "total" : 4505550,
-                "men" : 2505550,
-                "women" : 2500000
-            }
-        },
-        {
-            "id": "IN-SK",
-            "name" : "Sikkim",
-            "projects": 3,
-            "amount_sanctioned": 5233000,
-            "beneficiaries" : {
-                "total" : 4505550,
-                "men" : 2505550,
-                "women" : 2500000
-            }
-        },
-        {
-            "id": "IN-TG",
-            "name" : "Telangana",
-            "projects": 3,
-            "amount_sanctioned": 5634000,
-            "beneficiaries" : {
-                "total" : 4505550,
-                "men" : 2505550,
-                "women" : 2500000
-            }
-        },
-        {
-            "id": "IN-TN",
-            "name" : "Tamil Nadu",
-            "projects": 0,
-            "amount_sanctioned": 0,
-            "beneficiaries" : {
-                "total" : 4505550,
-                "men" : 2505550,
-                "women" : 2500000
-            }
-        },
-        {
-            "id": "IN-TR",
-            "name" : "Tripura",
-            "projects": 1,
-            "amount_sanctioned": 214000,
-            "beneficiaries" : {
-                "total" : 4505550,
-                "men" : 2505550,
-                "women" : 2500000
-            }
-        },
-        {
-            "id": "IN-UP",
-            "name" : "Uttar Pradesh",
-            "projects": 1,
-            "amount_sanctioned": 6235000,
-            "beneficiaries" : {
-                "total" : 4505550,
-                "men" : 2505550,
-                "women" : 2500000
-            }
-        },
-        {
-            "id": "IN-UT",
-            "name" : "Uttarakhand",
-            "projects": 2,
-            "amount_sanctioned": 5266000,
-            "beneficiaries" : {
-                "total" : 4505550,
-                "men" : 2505550,
-                "women" : 2500000
-            }
-        },
-        {
-            "id": "IN-WB",
-            "name" : "West Bengal",
-            "projects": 3,
-            "amount_sanctioned": 7364000,
-            "beneficiaries" : {
-                "total" : 4505550,
-                "men" : 2505550,
-                "women" : 2500000
-            }
-        }
-    ]
-}
-
+    {
+        "columnName": "statecode",
+        "columnType": "CHAR",
+        "columnDisplayType": "STRING",
+        "isColumnNullable": false,
+        "isColumnPrimaryKey": false,
+        "columnValues": [],
+        "visibilityCriteria": []
+    },
+    {
+        "columnName": "projectcount",
+        "columnType": "BIGINT",
+        "columnDisplayType": "INTEGER",
+        "isColumnNullable": false,
+        "isColumnPrimaryKey": false,
+        "columnValues": [],
+        "visibilityCriteria": []
+    },
+    {
+        "columnName": "directbenificieries",
+        "columnType": "DECIMAL",
+        "columnDisplayType": "DECIMAL",
+        "isColumnNullable": false,
+        "isColumnPrimaryKey": false,
+        "columnValues": [],
+        "visibilityCriteria": []
+    },
+    {
+        "columnName": "indirectbenificieries",
+        "columnType": "DECIMAL",
+        "columnDisplayType": "DECIMAL",
+        "isColumnNullable": false,
+        "isColumnPrimaryKey": false,
+        "columnValues": [],
+        "visibilityCriteria": []
+    }
+], "data": [
+    {
+        "row": ["Andhra Pradesh", "IN-AP", "1", "70000", "70000"]
+    },
+    {
+        "row": ["Gujarat", "IN-GJ", "1", "0", "0"]
+    },
+    {
+        "row": ["Karnataka", "IN-KA", "5", "72200", "92000"]
+    }
+]}

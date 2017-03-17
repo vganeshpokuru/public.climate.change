@@ -80,11 +80,18 @@ define(['angular','d3', 'angular-ui-router','resources/resources','datatablePars
             });
             resource.States.all.get(function(response){
 
+                response = datatableParserService.parse(response);
+                console.log(response);
+                for (var i = 0, x = response.length; i < x; i++) {
+                    var state = response[i];
+                    state.id = state.statecode;
+                    state.name = state.statename;
+                    state.projects = state.projectcount;
+                    state.beneficiaries = { total : (state.directbenificieries + state.indirectbenificieries), direct : state.directbenificieries, indirect : state.indirectbenificieries};
 
+                }
 
-
-
-                indianStates = response.states;
+                indianStates = response;
                 $scope.stateData = indianStates;
 
                 //Construct map of the states for faster lookup to show the tooltip
