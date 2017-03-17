@@ -1,0 +1,42 @@
+{"columnHeaders": [
+    {
+        "columnName": "numberofprojects",
+        "columnType": "BIGINT",
+        "columnDisplayType": "INTEGER",
+        "isColumnNullable": false,
+        "isColumnPrimaryKey": false,
+        "columnValues": [],
+        "visibilityCriteria": []
+    },
+    {
+        "columnName": "numberofstates",
+        "columnType": "BIGINT",
+        "columnDisplayType": "INTEGER",
+        "isColumnNullable": false,
+        "isColumnPrimaryKey": false,
+        "columnValues": [],
+        "visibilityCriteria": []
+    },
+    {
+        "columnName": "projectcost",
+        "columnType": "DECIMAL",
+        "columnDisplayType": "DECIMAL",
+        "isColumnNullable": false,
+        "isColumnPrimaryKey": false,
+        "columnValues": [],
+        "visibilityCriteria": []
+    },
+    {
+        "columnName": "totalbenificieries",
+        "columnType": "DECIMAL",
+        "columnDisplayType": "DECIMAL",
+        "isColumnNullable": false,
+        "isColumnPrimaryKey": false,
+        "columnValues": [],
+        "visibilityCriteria": []
+    }
+], "data": [
+    {
+        "row": ["4", "4", "101200000.000000", "826200"]
+    }
+]}

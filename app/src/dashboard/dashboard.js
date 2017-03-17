@@ -64,14 +64,25 @@ define(['angular','d3', 'angular-ui-router','resources/resources','datatablePars
                 };
 
 
+            resource.Projects.all.get(function(response){
+
+                var r = datatableParserService.parse(response)[0];
+                console.log(r);
+                _initStats.projects = r.numberofprojects;
+                _initStats.states = r.numberofstates;
+                _initStats.sanctioned = r.projectcost;
+                _initStats.beneficiaries = r.totalbenificieries;
+                $scope.stats = angular.copy(_initStats);
+
+
+            },function(error){
+                console.error('Could not fetch All Projects Data',error);
+            });
             resource.States.all.get(function(response){
 
-                _initStats.projects = response.projects;
-                _initStats.states = response.num_states;
-                _initStats.sanctioned = response.amount_sanctioned;
-                _initStats.beneficiaries = response.beneficiaries.total;
 
-                $scope.stats = angular.copy(_initStats);
+
+
 
                 indianStates = response.states;
                 $scope.stateData = indianStates;

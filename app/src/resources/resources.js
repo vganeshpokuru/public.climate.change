@@ -10,8 +10,11 @@ define(['angular'], function(angular) {
                 return {
                     Master: {
                         funds: $resource(baseUrl + '/funds_datatable.json'),
-                        sectors : $resource(baseUrl + '/sectors.json'),
+                        sectors : $resource(baseUrl + '/sectors.json')
 
+                    },
+                    Projects :{
+                      all :   $resource(baseUrl + '/allProjects.json')
                     },
                     States : {
                         all : $resource(baseUrl + '/states.json'),
