@@ -39,12 +39,14 @@ define(['angular', 'd3', 'angular-ui-router', 'resources/resources', 'datatableP
             };
 
             //Load sectors
+            /*
             $scope.sectors = [];
             resource.Master.sectors.query(function (response) {
                 $scope.sectors = response;
             }, function (error) {
                 console.error('Error while loading sectors', error);
             });
+            */
 
             /* initialize */
 

@@ -1,10 +1,21 @@
-[
+{"columnHeaders": [
     {
-        "name" : "Adaptation Fund",
-        "shortName" : "AF"
+        "columnName": "name",
+        "columnType": "VARCHAR",
+        "columnDisplayType": "STRING",
+        "isColumnNullable": false,
+        "isColumnPrimaryKey": false,
+        "columnValues": [],
+        "visibilityCriteria": []
+    }
+], "data": [
+    {
+        "row": ["Adaptation Fund"]
     },
     {
-        "name" : "Green Climate Fund",
-        "shortName" : "GCF"
+        "row": ["Green Climate Fund"]
+    },
+    {
+        "row": ["NAFCC"]
     }
-]
+]}
