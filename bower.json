@@ -19,6 +19,10 @@
     "countUp.js": "countup#^1.8.1",
     "angular-chart.js": "^1.1.1",
     "d3": "^4.4.3",
-    "chart.js": "chartjs#^2.5.0"
+    "chart.js": "chartjs#^2.5.0",
+    "angularjs-dropdown-multiselect": "^1.11.8"
+  },
+  "resolutions": {
+    "angular": "1.6.3"
   }
 }

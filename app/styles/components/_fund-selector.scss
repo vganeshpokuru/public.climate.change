@@ -1,0 +1,17 @@
+/* @import this file */
+#fund-selector{
+  position: fixed;
+  left:0;right:0;top:0;
+  padding-top:10px;
+
+  div[class^="col-"] {
+    white-space: nowrap;
+    padding-left:2px;
+    padding-right:2px;
+  }
+  .fund-item{
+    height:30px;
+    width:100%;
+    margin:0 2px;
+  }
+}

@@ -1,15 +1,21 @@
+Funds : <select chosen="{width:'600px'}" multiple ng-model="selectedFunds"
+        ng-options="fund.name as fund.name for fund in funds" placeholder-text-multiple="'No funds selected. Select a fund'"
+        ng-change="updateSelectedFunds(selectedFunds)">
+    <option value=""></option>
+</select>
 
+<hr style="border-top:1px solid #e0e0e0;"/>
 <div class="container" id="top-level-stats" style="background:#fff;">
 
     <div class="row">
         <div class="col-xs-3">
-            <statbox title="Projects" stat="stats.projects" ></statbox>
+            <statbox title="Projects" stat="stats.projects"></statbox>
         </div>
         <div class="col-xs-3">
-            <statbox title="States" stat="stats.states" ></statbox>
+            <statbox title="States" stat="stats.states"></statbox>
         </div>
         <div class="col-xs-3">
-            <statbox title="Sanctioned" stat="stats.sanctioned" ></statbox>
+            <statbox title="Sanctioned" stat="stats.sanctioned"></statbox>
         </div>
         <div class="col-xs-3">
             <statbox title="Beneficiaries" stat="stats.beneficiaries"></statbox>
@@ -18,73 +24,74 @@
 
     <br>
 
+
 </div>
+<div class="map-container" id="india-map-container">
 
-        <div class="map-container" id="india-map-container">
+    <div class="row">
+        <div class="col-sm-6 col-sm-offset-3 map-column">
+            <div class="map-toolbar">
+                <button class="btn btn-circle btn-default" ng-click="zoomOutMap(this)"><span
+                        class="glyphicon glyphicon-home"></span></button>
+            </div>
 
-            <div class="row">
-                <div class="col-sm-6 col-sm-offset-3 map-column" >
-                    <div class="map-toolbar">
-                        <button class="btn btn-circle btn-default" ng-click="zoomOutMap(this)"><span class="glyphicon glyphicon-home"></span></button>
+            <div class="svg-container" ng-include="'src/dashboard/india-map.html'"></div>
+        </div>
+        <div class="col-sm-6" ng-if="selectedState.name">
+            <div class="text-center">
+                <br><br><br>
+
+                <h1 class="text-primary">{{selectedState.name}}</h1>
+                <br>
+
+                <div class="row" style="border-top:1px solid #f0f0f0; border-bottom:1px solid #f0f0f0; padding:10px 0;">
+                    <div class="col-sm-4">
+                        <statbox title="Projects" size="sm" stat="selectedState.projects"></statbox>
                     </div>
-
-                    <div class="svg-container"  ng-include="'src/dashboard/india-map.html'"></div>
-                </div>
-                <div class="col-sm-6" ng-if="selectedState.name">
-                    <div class="text-center">
-                        <br><br><br>
-                        <h1 class="text-primary">{{selectedState.name}}</h1>
-                        <br>
-
-                        <div class="row" style="border-top:1px solid #f0f0f0; border-bottom:1px solid #f0f0f0; padding:10px 0;">
-                            <div class="col-sm-4">
-                                <statbox title="Projects" size="sm" stat="selectedState.projects" ></statbox>
-                            </div>
-                            <div class="col-sm-4">
-                                <statbox title="Sanctioned" size="sm" stat="selectedState.amount_sanctioned" ></statbox>
-                            </div>
-                            <div class="col-sm-4">
-                                <statbox title="Beneficiaries" size="sm" stat="selectedState.beneficiaries.total" ></statbox>
-                            </div>
-                        </div>
-
-
-                        <br>
-                        <h3 style="font-weight: 100">Projects in {{selectedState.name}}</h3>
-
-                        <br>
-
-                        <div class="row">
-                            <div class="col-xs-10 col-xs-offset-1">
-                                <table class="table text-left no-top-border">
-                                    <tr ng-repeat="project in selectedState.projectsData">
-                                        <td>
-                                            &RightAngleBracket;&RightAngleBracket;
-                                        </td>
-                                        <td>
-                                            <a href="./">{{project.projectshortname}}</a>
-                                        </td>
-                                        <td>
-                                           {{project.amount_sanctioned | currency:'$ '}}
-                                        </td>
-                                        <td>
-                                            <span class="label label-info label-pill">{{project.projectcategory | capitalize:true}}</span>
-                                        </td>
-                                    </tr>
-
-                                </table>
-                            </div>
-                        </div>
-
-
-
-
+                    <div class="col-sm-4">
+                        <statbox title="Sanctioned" size="sm" stat="selectedState.amount_sanctioned"></statbox>
                     </div>
-
+                    <div class="col-sm-4">
+                        <statbox title="Beneficiaries" size="sm" stat="selectedState.beneficiaries.total"></statbox>
+                    </div>
                 </div>
+
+
+                <br>
+
+                <h3 style="font-weight: 100">Projects in {{selectedState.name}}</h3>
+
+                <br>
+
+                <div class="row">
+                    <div class="col-xs-10 col-xs-offset-1">
+                        <table class="table text-left no-top-border">
+                            <tr ng-repeat="project in selectedState.projectsData">
+                                <td>
+                                    &RightAngleBracket;&RightAngleBracket;
+                                </td>
+                                <td style="width:45%">
+                                    <a href="./">{{project.projectShortName}}</a>
+                                </td>
+                                <td>
+                                    {{project.releasedAmount | currency:'$ '}}
+                                </td>
+                                <td>
+                                    <span class="label label-info label-pill">{{project.projectCategory | capitalize:true}}</span>
+                                </td>
+                            </tr>
+
+                        </table>
+                    </div>
+                </div>
+
+
             </div>
 
         </div>
+    </div>
+
+</div>
 
 <section>
     <div class="container">
@@ -92,6 +99,7 @@
             <div class="col-sm-4" style="padding:60px 0 0 0">
 
                 <h3>Fund Distribution - States</h3>
+
                 <p>A view of state-wise distribution of funds allocated in different projects</p>
 
             </div>
@@ -119,6 +127,7 @@
             <div class="col-sm-4 col-sm-offset-1" style="padding:130px 0 0 0">
 
                 <h3>Fund Distribution - Sectors</h3>
+
                 <p>A view of sector-wise distribution of funds allocated in different projects</p>
 
             </div>
@@ -128,4 +137,15 @@
 
 
 </section>
-
+<table class="table">
+    <tr ng-repeat="s in stateData">
+        <td>
+            {{s.name}}
+        </td>
+        <td>
+           <div ng-repeat="p in s.projectDetails">
+               {{$index+1}} &nbsp; &nbsp; &nbsp; &nbsp; <strong> {{p.fundName}}</strong> &nbsp; &nbsp; &nbsp; {{p.projectShortName}}
+           </div>
+        </td>
+    </tr>
+</table>

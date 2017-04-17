@@ -1,0 +1,88 @@
+{"columnHeaders": [
+    {
+        "columnName": "projectId",
+        "columnType": "BIGINT",
+        "columnDisplayType": "INTEGER",
+        "isColumnNullable": false,
+        "isColumnPrimaryKey": false,
+        "columnValues": [],
+        "visibilityCriteria": []
+    },
+    {
+        "columnName": "fundName",
+        "columnType": "VARCHAR",
+        "columnDisplayType": "STRING",
+        "isColumnNullable": false,
+        "isColumnPrimaryKey": false,
+        "columnValues": [],
+        "visibilityCriteria": []
+    },
+    {
+        "columnName": "projectCategory",
+        "columnType": "VARCHAR",
+        "columnDisplayType": "STRING",
+        "isColumnNullable": false,
+        "isColumnPrimaryKey": false,
+        "columnValues": [],
+        "visibilityCriteria": []
+    },
+    {
+        "columnName": "projectShortName",
+        "columnType": "VARCHAR",
+        "columnDisplayType": "STRING",
+        "isColumnNullable": false,
+        "isColumnPrimaryKey": false,
+        "columnValues": [],
+        "visibilityCriteria": []
+    },
+    {
+        "columnName": "projectCost",
+        "columnType": "DECIMAL",
+        "columnDisplayType": "DECIMAL",
+        "isColumnNullable": false,
+        "isColumnPrimaryKey": false,
+        "columnValues": [],
+        "visibilityCriteria": []
+    },
+    {
+        "columnName": "releasedAmount",
+        "columnType": "DECIMAL",
+        "columnDisplayType": "DECIMAL",
+        "isColumnNullable": false,
+        "isColumnPrimaryKey": false,
+        "columnValues": [],
+        "visibilityCriteria": []
+    },
+    {
+        "columnName": "directbenificieries",
+        "columnType": "DECIMAL",
+        "columnDisplayType": "DECIMAL",
+        "isColumnNullable": false,
+        "isColumnPrimaryKey": false,
+        "columnValues": [],
+        "visibilityCriteria": []
+    },
+    {
+        "columnName": "indirectbenificieries",
+        "columnType": "DECIMAL",
+        "columnDisplayType": "DECIMAL",
+        "isColumnNullable": false,
+        "isColumnPrimaryKey": false,
+        "columnValues": [],
+        "visibilityCriteria": []
+    },
+    {
+        "columnName": "state",
+        "columnType": "CHAR",
+        "columnDisplayType": "STRING",
+        "isColumnNullable": false,
+        "isColumnPrimaryKey": false,
+        "columnValues": [],
+        "visibilityCriteria": []
+    }
+], "data": [
+    {
+        "row": ["2", "Adaptation Fund", "energy", "Enhancing Adaptive Capacity and increasing Resilience of Small and Marginal Farmers", "1000000.000000", "400000.000000", "0", "0", "IN-WB"]
+    }
+]}
+

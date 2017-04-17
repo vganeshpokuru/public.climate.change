@@ -16,7 +16,8 @@ require([
     'angular-countup',
     'angular-chartjs',
     'datatableParserService/datatableParserService',
-    'capitalize/capitalize'
+    'capitalize/capitalize',
+    'angular-multiselect'
 ], function(angular) {
     'use strict';
 
@@ -38,7 +39,8 @@ require([
             'countUpModule',
             'chart.js',
             'datatableParserModule',
-            'capitalizeModule'
+            'capitalizeModule',
+            'angularjs-dropdown-multiselect'
         ]).config(['$urlRouterProvider', '$provide', function($urlRouterProvider, $provide) {
             $urlRouterProvider.otherwise('/');
 

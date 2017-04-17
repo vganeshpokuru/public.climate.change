@@ -41,7 +41,8 @@ requirejs.config({
         'angular-countup' : 'lib/countUp.js/dist/angular-countUp',
         'chart' : '../bower_components/chart.js/dist/Chart',
         'angular-chartjs' : '../bower_components/angular-chart.js/dist/angular-chart',
-        'd3' : '../bower_components/d3/d3.min'
+        'd3' : '../bower_components/d3/d3.min',
+        'angular-multiselect' : '../bower_components/angularjs-dropdown-multiselect/dist/angularjs-dropdown-multiselect.min'
         /*--insert code tag--do not remove*/
     },
     shim: {
@@ -58,7 +59,8 @@ requirejs.config({
         'chosen':['jquery'],
         'angular-chosen-localytics':['chosen','angular'],
         'angular-countup':['angular','countup'],
-        'angular-chartjs' : ['angular','chart']
+        'angular-chartjs' : ['angular','chart'],
+        'angular-multiselect' : ['angular']
 
 
     },
