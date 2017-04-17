@@ -67,6 +67,12 @@ require([
             ]);
         }]).config(['$qProvider', function($qProvider) {
             $qProvider.errorOnUnhandledRejections(false);
+        }]).run(['$http',function($http){
+            //Authorization: Basic Y29uZmx1eDpwYXNzd29yZA==
+            //Fineract-Platform-TenantId: default
+            $http.defaults.headers.common['Authorization'] = 'Basic Y29uZmx1eDpwYXNzd29yZA==';
+            $http.defaults.headers.common['Fineract-Platform-TenantId'] = 'default';
+
         }]);
 
         /*bootstrap model*/

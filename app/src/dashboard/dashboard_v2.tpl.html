@@ -147,18 +147,6 @@ Funds : <select chosen="{width:'600px'}" multiple ng-model="selectedFunds"
 
 
 </section>
-<table class="table">
-    <tr ng-repeat="s in stateData">
-        <td>
-            {{s.name}}
-        </td>
-        <td>
-           <div ng-repeat="p in s.projectDetails">
-               {{$index+1}} &nbsp; &nbsp; &nbsp; &nbsp; <strong> {{p.fundName}}</strong> &nbsp; &nbsp; &nbsp; {{p.projectShortName}}
-           </div>
-        </td>
-    </tr>
-</table>
 
 <div class="modal fade" id="projectModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
