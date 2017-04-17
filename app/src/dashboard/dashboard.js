@@ -4,9 +4,9 @@ define(['angular', 'd3', 'angular-ui-router', 'resources/resources', 'datatableP
         $stateProvider.state('dashboard', {
             url: '/',
             templateUrl: 'src/dashboard/dashboard_v2.tpl.html',
-            controller: 'DummyDashboardController'
+            controller: 'DashboardController'
         });
-    }]).controller('DummyDashboardController', [
+    }]).controller('DashboardController', [
         '$scope',
         '$location',
         '$timeout',
@@ -14,7 +14,8 @@ define(['angular', 'd3', 'angular-ui-router', 'resources/resources', 'datatableP
         'ResourcesService',
         'DatatableParserService',
         'DashboardDataServiceService',
-        function ($scope, $location, $timeout, $filter, resource, datatableParserService, dashboardDataServiceService) {
+        '$uibModal',
+        function ($scope, $location, $timeout, $filter, resource, datatableParserService, dashboardDataServiceService,$uibModal) {
 
 
             //Load funds
@@ -99,6 +100,13 @@ define(['angular', 'd3', 'angular-ui-router', 'resources/resources', 'datatableP
 
                     _updateTopLevelStats();
 
+                    //Reset all states on map
+                    for(var s in stateCodeMap){
+                        if(stateCodeMap.hasOwnProperty(s)){
+                            $scope[s.replace('IN-', '').toLowerCase() + 'Style'] = null;
+                        }
+                    }
+
                     for (var i = 0, x = filteredStates.length; i < x; i++) {
 
                         _totalProjects += filteredStates[i].projects;
@@ -115,6 +123,8 @@ define(['angular', 'd3', 'angular-ui-router', 'resources/resources', 'datatableP
                         var state = filteredStates[i];
                         $scope[state.id.replace('IN-', '').toLowerCase() + 'Style'] = {fill: multiHues[Math.ceil(multiHues.length * (state.projects / _maxProjects)) - 1]};
                     }
+
+
                 });
             }
 
@@ -180,10 +190,6 @@ define(['angular', 'd3', 'angular-ui-router', 'resources/resources', 'datatableP
                     console.log($scope.selectedState.projectsData);
                 });
 
-                $scope.stats.projects = data.projects;
-                $scope.stats.states = 1;
-                $scope.stats.beneficiaries = (data.projects / _maxProjects) * Math.round(10000 + Math.random() * 30000);
-                $scope.stats.sanctioned = Math.round(1 + Math.random() * 9);
             };
 
 
@@ -207,7 +213,7 @@ define(['angular', 'd3', 'angular-ui-router', 'resources/resources', 'datatableP
                 mapContainer.classList.remove('state-selected');
                 $('#india-map-container').removeClass('state-selected');
                 $('body').removeClass('state-selected');
-                _resettats();
+                //_resettats();
             };
             $scope.selectedState = {};
             window.d3 = d3;
@@ -259,6 +265,14 @@ define(['angular', 'd3', 'angular-ui-router', 'resources/resources', 'datatableP
                     elem.classList.add('selected');
                     $scope.$apply(function () {
                         $scope.selectedState = _getState(elem.id);
+                        if(!$scope.selectedState){
+                            $scope.selectedState= {
+                                name : stateCodeMap[elem.id],
+                                projects : 0,
+                                beneficiaries : {total : 0},
+                                projectsData : []
+                                }
+                        }
                         _updateStats(_getState(elem.id));
                     });
 
@@ -281,7 +295,10 @@ define(['angular', 'd3', 'angular-ui-router', 'resources/resources', 'datatableP
 
                         var key = elem.id.replace('IN-', '').toLowerCase(),
                             stateData = _stateWiseDataMap[key];
-                        showTooltip(event.pageX, event.pageY, stateData.projects, $filter('currency')(stateData.amount_sanctioned, '$ ', 0));
+                        if(stateData){
+                            showTooltip(event.pageX, event.pageY, stateData.projects, $filter('currency')(stateData.amount_sanctioned, '$ ', 0));
+                        }
+
                         __tooltipTimeout = null;
                     }, 200);
 
@@ -341,6 +358,31 @@ define(['angular', 'd3', 'angular-ui-router', 'resources/resources', 'datatableP
                 [28, 48, 40, 19, 96, 27, 100]
             ];
 
+
+
+
+            $scope.selectedProject = {};
+            $scope.openProjectDetails = function (project) {
+                $scope.selectedProject = project;
+
+                $('#projectModal').modal('show')
+            };
+
         }
-    ]);
+    ])
+        .controller('ModalInstanceCtrl', function ($uibModalInstance, items) {
+            var $ctrl = this;
+            $ctrl.items = items;
+            $ctrl.selected = {
+                item: $ctrl.items[0]
+            };
+
+            $ctrl.ok = function () {
+                $uibModalInstance.close($ctrl.selected.item);
+            };
+
+            $ctrl.cancel = function () {
+                $uibModalInstance.dismiss('cancel');
+            };
+        });
 });
