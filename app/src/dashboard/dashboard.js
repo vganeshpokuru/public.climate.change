@@ -15,7 +15,7 @@ define(['angular', 'd3', 'angular-ui-router', 'resources/resources', 'datatableP
         'DatatableParserService',
         'DashboardDataServiceService',
         '$uibModal',
-        function ($scope, $location, $timeout, $filter, resource, datatableParserService, dashboardDataServiceService,$uibModal) {
+        function ($scope, $location, $timeout, $filter, resource, datatableParserService, dashboardDataServiceService, $uibModal) {
 
 
             //Load funds
@@ -28,25 +28,25 @@ define(['angular', 'd3', 'angular-ui-router', 'resources/resources', 'datatableP
                 console.error('Error while loading funds', error);
             });
             $scope.selectedFunds = [];
-            var _selectAllFunds = function(){
+            var _selectAllFunds = function () {
                 for (var i = 0, x = $scope.funds.length; i < x; i++) {
                     $scope.selectedFunds.push($scope.funds[i].name)
                 }
             };
 
-            $scope.updateSelectedFunds = function(selectedFunds){
+            $scope.updateSelectedFunds = function (selectedFunds) {
                 $scope.filterByFunds(selectedFunds);
             };
 
             //Load sectors
             /*
-            $scope.sectors = [];
-            resource.Master.sectors.query(function (response) {
-                $scope.sectors = response;
-            }, function (error) {
-                console.error('Error while loading sectors', error);
-            });
-            */
+             $scope.sectors = [];
+             resource.Master.sectors.query(function (response) {
+             $scope.sectors = response;
+             }, function (error) {
+             console.error('Error while loading sectors', error);
+             });
+             */
 
             /* initialize */
 
@@ -103,8 +103,8 @@ define(['angular', 'd3', 'angular-ui-router', 'resources/resources', 'datatableP
                     _updateTopLevelStats();
 
                     //Reset all states on map
-                    for(var s in stateCodeMap){
-                        if(stateCodeMap.hasOwnProperty(s)){
+                    for (var s in stateCodeMap) {
+                        if (stateCodeMap.hasOwnProperty(s)) {
                             $scope[s.replace('IN-', '').toLowerCase() + 'Style'] = null;
                         }
                     }
@@ -156,7 +156,7 @@ define(['angular', 'd3', 'angular-ui-router', 'resources/resources', 'datatableP
                 }
 
                 init();
-                _initBarChart();
+                //_initBarChart();
 
                 //Adding the legend
                 setTimeout(function () {
@@ -267,13 +267,13 @@ define(['angular', 'd3', 'angular-ui-router', 'resources/resources', 'datatableP
                     elem.classList.add('selected');
                     $scope.$apply(function () {
                         $scope.selectedState = _getState(elem.id);
-                        if(!$scope.selectedState){
-                            $scope.selectedState= {
-                                name : stateCodeMap[elem.id],
-                                projects : 0,
-                                beneficiaries : {total : 0},
-                                projectsData : []
-                                }
+                        if (!$scope.selectedState) {
+                            $scope.selectedState = {
+                                name: stateCodeMap[elem.id],
+                                projects: 0,
+                                beneficiaries: {total: 0},
+                                projectsData: []
+                            }
                         }
                         _updateStats(_getState(elem.id));
                     });
@@ -297,7 +297,7 @@ define(['angular', 'd3', 'angular-ui-router', 'resources/resources', 'datatableP
 
                         var key = elem.id.replace('IN-', '').toLowerCase(),
                             stateData = _stateWiseDataMap[key];
-                        if(stateData){
+                        if (stateData) {
                             showTooltip(event.pageX, event.pageY, stateData.projects, $filter('currency')(stateData.amount_sanctioned, '$ ', 0));
                         }
 
@@ -325,16 +325,31 @@ define(['angular', 'd3', 'angular-ui-router', 'resources/resources', 'datatableP
             $scope.data = [
                 []
             ];
-            var _initBarChart = function () {
+            $scope.barChartOptions = {
+                scales: {
+                    yAxes: [
+                        {
+                            ticks: {
+                                //stepSize: 1,
+                                beginAtZero: true,
+                                label : 'Funds Allocated'
+                            }
+                        }
+                    ]
+                }
+            };
+
+
+            var _updateBarChart = function (stateData) {
+                if (!stateData) return;
                 var labels = [];
                 var data = [];
-                for (var i = 0, x = $scope.stateData.length; i < x; i++) {
+                for (var i = 0, x = stateData.length; i < x; i++) {
                     if (i > 18) break;
-                    var state = $scope.stateData[i];
-                    if (state.projects > 0) {
-                        labels.push(state.name);
-                        data.push(state.projects);
-                    }
+                    var state = stateData[i];
+                    console.log(state);
+                    labels.push(state.name);
+                    data.push(state.amount_sanctioned);
                 }
 
                 $scope.labels = angular.copy(labels);
@@ -343,24 +358,39 @@ define(['angular', 'd3', 'angular-ui-router', 'resources/resources', 'datatableP
             };
 
 
-            $scope.datasets = [
-                {
-                    label: "Fund allocated",
-                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                    borderColor: 'rgba(255,99,132,1)',
-                    borderWidth: 1,
-                    data: [65, 59, 80, 81, 56, 55, 40]
+            $scope.sectorWiseLabels = ["Energy", "Education"];
+            $scope.sectorWiseData = [40, 60];
+            var _sectorMap = {};
+
+            var _updateSectorWiseData = function (data) {
+                if (!data) return;
+                for (var i = 0, x = data.length; i < x; i++) {
+                    var state = data[i];
+                    //loop through state.projectDetails
+                    for (var j = 0, y = state.projectDetails.length; j < y; j++) {
+                        var project = state.projectDetails[j];
+                        if (!_sectorMap.hasOwnProperty(project.projectCategory)) {
+                            _sectorMap[project.projectCategory] = 0;
+                        }
+                        _sectorMap[project.projectCategory] += project.releasedAmount;
+                    }
                 }
-            ];
+                $scope.sectorWiseLabels = [];
+                $scope.sectorWiseData = [];
 
-            $scope.radar_labels = ["Agriculture", "Renewable Energy", "Water", "Fisheries", "Livestock", "Coastal Resources", "Forestry"];
+                for (var key in _sectorMap) {
+                    if (!_sectorMap.hasOwnProperty(key)) continue;
+                    $scope.sectorWiseLabels.push(key);
+                    $scope.sectorWiseData.push(_sectorMap[key]);
+                }
+            };
 
-            $scope.radar_data = [
-                [65, 59, 90, 81, 56, 55, 40],
-                [28, 48, 40, 19, 96, 27, 100]
-            ];
-
-
+            $scope.$watch(function () {
+                return $scope.stateData;
+            }, function (newVal, oldVal) {
+                _updateSectorWiseData(newVal);
+                _updateBarChart(newVal);
+            });
 
 
             $scope.selectedProject = {};

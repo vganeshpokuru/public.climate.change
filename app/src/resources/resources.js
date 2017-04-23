@@ -4,7 +4,7 @@ define(['angular'], function(angular) {
         .factory('ResourcesService', ['$resource',
             function($resource) {
 
-                var env = 'remote'; //Change to remote if you want to connect to server and not use dummy data
+                var env = 'local'; //Change to remote if you want to connect to server and not use dummy data
                 var baseUrl = './data';
                 var suffix ='.json'
 

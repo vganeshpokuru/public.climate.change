@@ -11,7 +11,8 @@ define(['angular'], function(angular) {
                         title : "@",
                         stat : "=",
                         statStyle : "=",
-                        size:'@'
+                        size:'@',
+                        options:"="
                     },
                     link: function(scope, element, attrs) {
 
