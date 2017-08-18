@@ -344,7 +344,7 @@ define(['angular', 'd3', 'angular-ui-router', 'resources/resources', 'datatableP
                 function showTooltip(x, y, projects, amount) {
                     var rootElt = 'body';
 
-                    $('<div id="tooltip" class="map-tooltip"><span class="projects">Projects : ' + projects + '</span><br><span>Amount : '+'₹' + amount +'Cr'+ '</span></div>').css({
+                    $('<div id="tooltip" class="map-tooltip"><span class="projects">Projects : ' + projects + '</span><br><span>Amount : '+'₹' + amount.toFixed(3) +'Cr'+ '</span></div>').css({
                         position: 'absolute',
                         display: 'none',
                         'z-index': '1010',
