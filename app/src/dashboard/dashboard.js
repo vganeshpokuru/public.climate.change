@@ -90,7 +90,7 @@ define(['angular', 'd3', 'angular-ui-router', 'resources/resources', 'datatableP
                              for(k=0, l= CurrentStateData.projectDetails.length; k < l; k++){
                             CurrentStateData.projectDetails[k].projectCost = parseFloat(CurrentStateData.projectDetails[k].projectCost).toFixed(3);
                             CurrentStateData.projectDetails[k].releasedAmount = parseFloat(CurrentStateData.projectDetails[k].releasedAmount).toFixed(3);
-                            currentSanctionAmount += parseFloat(CurrentStateData.projectDetails[k].releasedAmount);
+                            currentSanctionAmount += parseFloat(CurrentStateData.projectDetails[k].projectCost);
                        }
                        CurrentStateData.amount_sanctioned = currentSanctionAmount;
                        _stateWiseDataMap[id] = CurrentStateData;
@@ -121,7 +121,7 @@ define(['angular', 'd3', 'angular-ui-router', 'resources/resources', 'datatableP
 
                             stateData.projectDetails[j].projectCost = parseFloat(stateData.projectDetails[j].projectCost/dividend).toFixed(3);
                             stateData.projectDetails[j].releasedAmount = parseFloat(stateData.projectDetails[j].releasedAmount /dividend).toFixed(3);
-                            currentSanctionAmount += parseFloat(stateData.projectDetails[j].releasedAmount);
+                            currentSanctionAmount += parseFloat(stateData.projectDetails[j].projectCost);
                        }
                        stateData.amount_sanctioned = currentSanctionAmount;
                       _stateWiseDataMap[id] = stateData;
@@ -362,7 +362,7 @@ define(['angular', 'd3', 'angular-ui-router', 'resources/resources', 'datatableP
             ];
             $scope.datasets =  [{
         pointBackgroundColor: ["#21E411","#E4113E","#8111E4","#006d2c","#F56446","#87F97E"] ,
-        backgroundColor: ["#AFC8E8","#12C6DB","#820518","#8111E4","#006d2c","#F56446","#87F97E","#2E81CA", "#f48973","#f49fa9", "#82b3dd","#FFE39F", "#f791dd","#B3C9A2", "#93B8A2","#b5aa19","#427066","#41ab5d"]
+        backgroundColor: ["#AFC8E8","#12C6DB","#820518","#8111E4","#006d2c","#F56446","#87F97E","#2E81CA", "#f48973","#f49fa9", "#82b3dd","#FFE39F", "#f791dd","#B3C9A2", "#93B8A2","#b5aa19","#427066","#41ab5d","#f48973","#f49fa9", "#82b3dd","#FFE39F", "#f791dd","#B3C9A2", "#93B8A2"]
 
       }];
             $scope.barChartOptions = {
@@ -411,7 +411,6 @@ define(['angular', 'd3', 'angular-ui-router', 'resources/resources', 'datatableP
                 var labels = [];
                 var data = [];
                 for (var i = 0, x = stateData.length; i < x; i++) {
-                    if (i > 18) break;
                     var state = stateData[i];
                     console.log(state);
                     labels.push(state.name);
@@ -455,7 +454,7 @@ define(['angular', 'd3', 'angular-ui-router', 'resources/resources', 'datatableP
                         if (!_sectorMap.hasOwnProperty(project.projectCategory)) {
                             _sectorMap[project.projectCategory] = 0;
                         }
-                        _sectorMap[project.projectCategory] += parseFloat(project.releasedAmount);
+                        _sectorMap[project.projectCategory] += parseFloat(project.projectCost);
                         _sectorMap[project.projectCategory] = _sectorMap[project.projectCategory];
                     }
                 }
