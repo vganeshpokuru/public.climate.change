@@ -8,7 +8,6 @@ define(['angular', 'resources/resources', 'datatableParserService/datatableParse
                     countryLevelData = {};
 
                 var indianStates = null;
-
                 var stateCodeMap = {"IN-AN": "Andaman and Nicobar Islands", "IN-AP": "Andhra Pradesh", "IN-AR": "Arunachal Pradesh", "IN-AS": "Assam", "IN-BR": "Bihar", "IN-CH": "Chandigarh", "IN-CT": "Chhattisgarh", "IN-DD": "Daman and Diu", "IN-DL": "Delhi", "IN-DN": "Dadra and Nagar Haveli", "IN-GA": "Goa", "IN-GJ": "Gujarat", "IN-HP": "Himachal Pradesh", "IN-HR": "Haryana", "IN-JH": "Jharkhand", "IN-JK": "Jammu and Kashmir", "IN-KA": "Karnataka", "IN-KL": "Kerala", "IN-LD": "Lakshadweep", "IN-MH": "Maharashtra", "IN-ML": "Meghalaya", "IN-MN": "Manipur", "IN-MP": "Madhya Pradesh", "IN-MZ": "Mizoram", "IN-NL": "Nagaland", "IN-OR": "Odisha", "IN-PB": "Punjab", "IN-PY": "Puducherry", "IN-RJ": "Rajasthan", "IN-SK": "Sikkim", "IN-TG": "Telangana", "IN-TN": "Tamil Nadu", "IN-TR": "Tripura", "IN-UP": "Uttar Pradesh", "IN-UT": "Uttarakhand", "IN-WB": "West Bengal"};
 
                 var _getAllProjects = function () {
@@ -58,7 +57,8 @@ define(['angular', 'resources/resources', 'datatableParserService/datatableParse
                                             indirect: 0
                                         },
                                         projectDetails: [],
-                                        amount_sanctioned: 0
+                                        amount_sanctioned: 0,
+                                        decimals:3
                                     };
                                     state.id = project.state;
                                     state.name = stateCodeMap[project.state];
@@ -142,7 +142,8 @@ define(['angular', 'resources/resources', 'datatableParserService/datatableParse
                                         indirect: 0
                                     },
                                     projectDetails: [],
-                                    amount_sanctioned: 0
+                                    amount_sanctioned: 0,
+                                    decimals:3
                                 };
                                 state.id = project.state;
                                 state.name = stateCodeMap[project.state];
@@ -154,7 +155,7 @@ define(['angular', 'resources/resources', 'datatableParserService/datatableParse
                             state.beneficiaries.direct += project.directbenificieries;
                             state.beneficiaries.indirect += project.indirectbenificieries;
                             state.projectDetails.push(project);
-                            state.amount_sanctioned += project.releasedAmount;
+                            state.amount_sanctioned += parseFloat(project.releasedAmount);
 
                         }
 

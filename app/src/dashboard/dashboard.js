@@ -17,7 +17,7 @@ define(['angular', 'd3', 'angular-ui-router', 'resources/resources', 'datatableP
         '$uibModal',
         function ($scope, $location, $timeout, $filter, resource, datatableParserService, dashboardDataServiceService, $uibModal) {
 
-
+            var dividend = 10000000;
             //Load funds
             $scope.funds = [];
 
@@ -49,12 +49,12 @@ define(['angular', 'd3', 'angular-ui-router', 'resources/resources', 'datatableP
              */
 
             /* initialize */
-
             var _initStats = {
                 projects: 0,
                 states: 0,
                 sanctioned: 0,
-                beneficiaries: 0
+                beneficiaries: 0,
+                decimals:3
             };
             $scope.stats = angular.copy(_initStats);
 
@@ -62,22 +62,45 @@ define(['angular', 'd3', 'angular-ui-router', 'resources/resources', 'datatableP
                 $scope.stats = angular.copy(_initStats);
             };
 
-            var _updateTopLevelStats = function () {
+            var _updateTopLevelStats = function (status) {
                 _resettats();
+                var totalAmount =0;
                 for (var i = 0, x = $scope.stateData.length; i < x; i++) {
                     var sData = $scope.stateData[i];
                     $scope.stats.projects += sData.projects;
                     $scope.stats.states += 1;
                     $scope.stats.beneficiaries += sData.beneficiaries.total;
-                    $scope.stats.sanctioned += sData.amount_sanctioned;
+                    totalAmount += parseFloat(sData.amount_sanctioned);
 
                 }
+               
+                if(status){
+                $scope.stats.sanctioned = parseFloat(totalAmount/dividend).toFixed(3);
+    
+                }else{
+                $scope.stats.sanctioned = totalAmount;
+                
+                _stateWiseDataMap = {};
+                var stateData = $scope.stateData;
+                for(var j = 0, y = stateData.length; j < y; j++){
+                        var id = stateData[j].id.replace("IN-", '').toLowerCase();
+                            var CurrentStateData = stateData[j];
+                            var currentSanctionAmount = 0;
+                            CurrentStateData.projectDetails = stateData[j].projectDetails;
+                             for(k=0, l= CurrentStateData.projectDetails.length; k < l; k++){
+                            CurrentStateData.projectDetails[k].projectCost = parseFloat(CurrentStateData.projectDetails[k].projectCost).toFixed(3);
+                            CurrentStateData.projectDetails[k].releasedAmount = parseFloat(CurrentStateData.projectDetails[k].releasedAmount).toFixed(3);
+                            currentSanctionAmount += parseFloat(CurrentStateData.projectDetails[k].releasedAmount);
+                       }
+                       CurrentStateData.amount_sanctioned = currentSanctionAmount;
+                       _stateWiseDataMap[id] = CurrentStateData;
+                   }
+               }
             }
-
 
             var blues = ["#96D0DF", "#85BFCE", "#6Ea6BE", "#6199B1", "#5E8ca4", "#58748A"],
                 greens = ["#c7e9c0", "#a1d99b", "#74c476", "#41ab5d", "#238b45", "#006d2c", "#00441b"],
-                multiHues = ["#CFF3D2", "#AEE2C7", "#91D1BE", "#78BFB6", "#62ACAF", "#509AA9", "#4186A4", "#3573A0"],
+                multiHues = ["#778899", "#4E4E56", "#778899", "#2E81CA", "#f48973","#f49fa9", "#82b3dd","#FFE39F", "#f791dd","#B3C9A2", "#93B8A2","#b5aa19","#427066", "#77A7A2", "#6097A1", "#4C84A0", "#c0f762", "#8e5f62", "#f2c7bc","#c7e9c0", "#74c476", "#41ab5d", "#238b45","#f2c7bc"],
                 multiHues2 = ["#FFE39F", "#D6D7A1", "#B3C9A2", "#93B8A2", "#77A7A2", "#6097A1", "#4C84A0", "#3A719E", "#2B5E9C", "#1F4B99"];
 
             var stateCodeMap = {"IN-AN": "Andaman and Nicobar Islands", "IN-AP": "Andhra Pradesh", "IN-AR": "Arunachal Pradesh", "IN-AS": "Assam", "IN-BR": "Bihar", "IN-CH": "Chandigarh", "IN-CT": "Chhattisgarh", "IN-DD": "Daman and Diu", "IN-DL": "Delhi", "IN-DN": "Dadra and Nagar Haveli", "IN-GA": "Goa", "IN-GJ": "Gujarat", "IN-HP": "Himachal Pradesh", "IN-HR": "Haryana", "IN-JH": "Jharkhand", "IN-JK": "Jammu and Kashmir", "IN-KA": "Karnataka", "IN-KL": "Kerala", "IN-LD": "Lakshadweep", "IN-MH": "Maharashtra", "IN-ML": "Meghalaya", "IN-MN": "Manipur", "IN-MP": "Madhya Pradesh", "IN-MZ": "Mizoram", "IN-NL": "Nagaland", "IN-OR": "Odisha", "IN-PB": "Punjab", "IN-PY": "Puducherry", "IN-RJ": "Rajasthan", "IN-SK": "Sikkim", "IN-TG": "Telangana", "IN-TN": "Tamil Nadu", "IN-TR": "Tripura", "IN-UP": "Uttar Pradesh", "IN-UT": "Uttarakhand", "IN-WB": "West Bengal"};
@@ -90,8 +113,18 @@ define(['angular', 'd3', 'angular-ui-router', 'resources/resources', 'datatableP
                 __constructDataMap = function (indianStates) {
                     for (var i = 0, x = indianStates.length; i < x; i++) {
                         var stateData = indianStates[i];
+                        var currentSanctionAmount = 0;
                         var id = stateData.id.replace("IN-", '').toLowerCase();
-                        _stateWiseDataMap[id] = stateData;
+                        
+                        stateData.projectDetails = indianStates[i].projectDetails;
+                        for(j=0, y= stateData.projectDetails.length; j < y; j++){
+
+                            stateData.projectDetails[j].projectCost = parseFloat(stateData.projectDetails[j].projectCost/dividend).toFixed(3);
+                            stateData.projectDetails[j].releasedAmount = parseFloat(stateData.projectDetails[j].releasedAmount /dividend).toFixed(3);
+                            currentSanctionAmount += parseFloat(stateData.projectDetails[j].releasedAmount);
+                       }
+                       stateData.amount_sanctioned = currentSanctionAmount;
+                      _stateWiseDataMap[id] = stateData;
                     }
                 };
 
@@ -99,8 +132,8 @@ define(['angular', 'd3', 'angular-ui-router', 'resources/resources', 'datatableP
             $scope.filterByFunds = function (fundList) {
                 dashboardDataServiceService.getAllStateListFilteredByFunds(fundList).then(function (filteredStates) {
                     $scope.stateData = filteredStates;
-
-                    _updateTopLevelStats();
+                    var status = false;
+                    _updateTopLevelStats(status);
 
                     //Reset all states on map
                     for (var s in stateCodeMap) {
@@ -123,7 +156,7 @@ define(['angular', 'd3', 'angular-ui-router', 'resources/resources', 'datatableP
 
                     for (var i = 0, x = filteredStates.length; i < x; i++) {
                         var state = filteredStates[i];
-                        $scope[state.id.replace('IN-', '').toLowerCase() + 'Style'] = {fill: multiHues[Math.ceil(multiHues.length * (state.projects / _maxProjects)) - 1]};
+                        $scope[state.id.replace('IN-', '').toLowerCase() + 'Style'] = {fill: multiHues[i]};
                     }
 
 
@@ -134,8 +167,8 @@ define(['angular', 'd3', 'angular-ui-router', 'resources/resources', 'datatableP
             dashboardDataServiceService.getAllStateList().then(function (indianStates) {
 
                 $scope.stateData = indianStates;
-
-                _updateTopLevelStats();
+                var status = true;
+                _updateTopLevelStats(status);
 
                 __constructDataMap(indianStates);
 
@@ -152,14 +185,14 @@ define(['angular', 'd3', 'angular-ui-router', 'resources/resources', 'datatableP
 
                 for (var i = 0, x = indianStates.length; i < x; i++) {
                     var state = indianStates[i];
-                    $scope[state.id.replace('IN-', '').toLowerCase() + 'Style'] = {fill: multiHues[Math.ceil(multiHues.length * (state.projects / _maxProjects)) - 1]};
+                    $scope[state.id.replace('IN-', '').toLowerCase() + 'Style'] = {fill: multiHues[i]};
                 }
 
                 init();
                 //_initBarChart();
 
                 //Adding the legend
-                setTimeout(function () {
+               /* setTimeout(function () {
                     var svg = d3.select('svg#india-map');
                     var height = svg.style('height').replace("px", "");
                     var g = svg.append('g').attr('id', 'legend');
@@ -173,7 +206,7 @@ define(['angular', 'd3', 'angular-ui-router', 'resources/resources', 'datatableP
                     console.log(height);
                     g.append('text').attr('x', 10 + ls_w).attr('y', height + ls_h).text('>= ' + _maxProjects + ' Projects')
                     g.append('text').attr('x', 10 + ls_w).attr('y', height - ls_h * (colorLength - 0.5)).text('No Projects')
-                }, 1000);
+                }, 1000);*/
 
 
             }, function (error) {
@@ -274,8 +307,10 @@ define(['angular', 'd3', 'angular-ui-router', 'resources/resources', 'datatableP
                                 beneficiaries: {total: 0},
                                 projectsData: []
                             }
+                            $scope.selectedState.amount_sanctioned = 0;
+                            $scope.selectedState.decimals = 3;
                         }
-                        _updateStats(_getState(elem.id));
+                        //_updateStats(_getState(elem.id));
                     });
 
                 });
@@ -298,7 +333,7 @@ define(['angular', 'd3', 'angular-ui-router', 'resources/resources', 'datatableP
                         var key = elem.id.replace('IN-', '').toLowerCase(),
                             stateData = _stateWiseDataMap[key];
                         if (stateData) {
-                            showTooltip(event.pageX, event.pageY, stateData.projects, $filter('currency')(stateData.amount_sanctioned, '$ ', 0));
+                            showTooltip(event.pageX, event.pageY, stateData.projects,stateData.amount_sanctioned);
                         }
 
                         __tooltipTimeout = null;
@@ -309,7 +344,7 @@ define(['angular', 'd3', 'angular-ui-router', 'resources/resources', 'datatableP
                 function showTooltip(x, y, projects, amount) {
                     var rootElt = 'body';
 
-                    $('<div id="tooltip" class="map-tooltip"><span class="projects">Projects : ' + projects + '</span><br><span>Amount : ' + amount + '</span></div>').css({
+                    $('<div id="tooltip" class="map-tooltip"><span class="projects">Projects : ' + projects + '</span><br><span>Amount : '+'₹' + amount +'Cr'+ '</span></div>').css({
                         position: 'absolute',
                         display: 'none',
                         'z-index': '1010',
@@ -325,17 +360,48 @@ define(['angular', 'd3', 'angular-ui-router', 'resources/resources', 'datatableP
             $scope.data = [
                 []
             ];
+            $scope.datasets =  [{
+        pointBackgroundColor: ["#21E411","#E4113E","#8111E4","#006d2c","#F56446","#87F97E"] ,
+        backgroundColor: ["#AFC8E8","#12C6DB","#820518","#8111E4","#006d2c","#F56446","#87F97E","#2E81CA", "#f48973","#f49fa9", "#82b3dd","#FFE39F", "#f791dd","#B3C9A2", "#93B8A2","#b5aa19","#427066","#41ab5d"]
+
+      }];
             $scope.barChartOptions = {
+                tooltips: {
+                 mode: 'single',
+                    callbacks: {
+                    label: function(tooltipItems, data) { 
+                         return data.datasets[tooltipItems.datasetIndex].label +': ' + tooltipItems.yLabel + 'Cr';
+                    }
+                }
+            },
                 scales: {
+                     xAxes: [{
+        stacked: false,
+        beginAtZero: true,
+        scaleLabel: {
+            labelString: 'States'
+        },
+        ticks: {
+            stepSize: 1,
+            min: 0,
+            autoSkip: false
+        }
+    }],
                     yAxes: [
                         {
                             ticks: {
                                 //stepSize: 1,
                                 beginAtZero: true,
                                 label : 'Funds Allocated'
-                            }
+                            },
+                            scaleLabel: {
+                    display: true,
+                    labelString: '<-- Amount in (Cr) -->'
+                }
                         }
                     ]
+                    
+
                 }
             };
 
@@ -361,8 +427,25 @@ define(['angular', 'd3', 'angular-ui-router', 'resources/resources', 'datatableP
             $scope.sectorWiseLabels = ["Energy", "Education"];
             $scope.sectorWiseData = [40, 60];
             var _sectorMap = {};
+            $scope.colors = ["#12C6DB","#820518"];
+            //$scope.override = [{ backgroundColor: ["#8111E4","#006d2c","#F56446","#87F97E","#2E81CA", "#f48973"]},{hoverBackgroundColor:["#8111E4","#006d2c","#F56446","#87F97E","#2E81CA", "#f48973"]}];
+            $scope.doughnutchartoption = {
+                tooltips: {
+                    hover: { 
+                        mode: null,
+                        enabled: false
+                    },
+                 mode: 'single',
+                    callbacks: {
+                        label: function(tooltipItems, sectorWiseData) { 
+                            return sectorWiseData.labels[tooltipItems.index] +': ' + sectorWiseData.datasets[tooltipItems.datasetIndex].data[tooltipItems.index] + 'Cr';
+                        }
+                    }
+                }
+            };
 
             var _updateSectorWiseData = function (data) {
+                var _sectorMap = {};
                 if (!data) return;
                 for (var i = 0, x = data.length; i < x; i++) {
                     var state = data[i];
@@ -372,7 +455,8 @@ define(['angular', 'd3', 'angular-ui-router', 'resources/resources', 'datatableP
                         if (!_sectorMap.hasOwnProperty(project.projectCategory)) {
                             _sectorMap[project.projectCategory] = 0;
                         }
-                        _sectorMap[project.projectCategory] += project.releasedAmount;
+                        _sectorMap[project.projectCategory] += parseFloat(project.releasedAmount);
+                        _sectorMap[project.projectCategory] = _sectorMap[project.projectCategory];
                     }
                 }
                 $scope.sectorWiseLabels = [];
@@ -381,7 +465,7 @@ define(['angular', 'd3', 'angular-ui-router', 'resources/resources', 'datatableP
                 for (var key in _sectorMap) {
                     if (!_sectorMap.hasOwnProperty(key)) continue;
                     $scope.sectorWiseLabels.push(key);
-                    $scope.sectorWiseData.push(_sectorMap[key]);
+                    $scope.sectorWiseData.push(parseFloat(_sectorMap[key]).toFixed(3));
                 }
             };
 

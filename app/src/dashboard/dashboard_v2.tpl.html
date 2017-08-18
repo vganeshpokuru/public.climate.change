@@ -1,3 +1,7 @@
+<div class="header">
+  <h3 style="color:#1D5434">Climate Change Portfolio of NABARD Projects</h3>
+</div>
+<hr style="border-top:1px solid #e0e0e0;"/>
 Funds : <select chosen="{width:'600px'}" multiple ng-model="selectedFunds"
         ng-options="fund.name as fund.name for fund in funds" placeholder-text-multiple="'No funds selected. Select a fund'"
         ng-change="updateSelectedFunds(selectedFunds)">
@@ -15,7 +19,7 @@ Funds : <select chosen="{width:'600px'}" multiple ng-model="selectedFunds"
             <statbox title="States" stat="stats.states"></statbox>
         </div>
         <div class="col-xs-3">
-            <statbox title="Sanctioned Amount" stat="stats.sanctioned" options=""></statbox>
+            <statbox title="Sanctioned Amount" stat="stats.sanctioned" decimals="stats.decimals" options=""></statbox>
         </div>
         <div class="col-xs-3">
             <statbox title="No. Of Beneficiaries" stat="stats.beneficiaries"></statbox>
@@ -49,7 +53,7 @@ Funds : <select chosen="{width:'600px'}" multiple ng-model="selectedFunds"
                         <statbox title="Projects" size="sm" stat="selectedState.projects"></statbox>
                     </div>
                     <div class="col-sm-4">
-                        <statbox title="Sanctioned Amount" size="sm" stat="selectedState.amount_sanctioned"></statbox>
+                        <statbox title="Sanctioned Amount" size="sm" stat="selectedState.amount_sanctioned" decimals="stats.decimals"></statbox>
                     </div>
                     <div class="col-sm-4">
                         <statbox title="No. of Beneficiaries" size="sm" stat="selectedState.beneficiaries.total"></statbox>
@@ -81,10 +85,10 @@ Funds : <select chosen="{width:'600px'}" multiple ng-model="selectedFunds"
                                     <a ng-click="openProjectDetails(project)">{{project.projectShortName}}</a>
                                 </td>
                                 <td>
-                                    {{project.projectCost | currency:project.currency+' '}}
+                                    {{project.projectCost | currency:project.currency+' ':3}}{{'Cr'}}
                                 </td>
                                 <td>
-                                    {{project.releasedAmount | currency:project.currency+' '}}
+                                    {{project.releasedAmount | currency:project.currency+' ':3}}{{'Cr'}}
                                 </td>
                                 <td>
                                     <span class="label label-info label-pill">{{project.projectCategory | capitalize:true}}</span>
@@ -113,7 +117,9 @@ Funds : <select chosen="{width:'600px'}" multiple ng-model="selectedFunds"
                 <p>A view of state-wise distribution of funds allocated in different projects</p>
 
             </div>
-            <div class="col-sm-6 col-sm-offset-1 ">
+        </div>
+        <div class="row">
+            <div class="col-sm-8 col-sm-offset-1 ">
                 <br>
                 <canvas id="bar" class="chart chart-bar" style="width:400px; margin:auto;"
                         chart-data="data" chart-labels="labels" chart-series="series" chart-dataset-override="datasets" chart-options="barChartOptions">
@@ -130,7 +136,7 @@ Funds : <select chosen="{width:'600px'}" multiple ng-model="selectedFunds"
         <div class="row">
             <div class="col-sm-4 col-sm-offset-2 ">
                 <br>
-                <canvas id="doughnut" class="chart chart-doughnut" chart-options="{tooltipTemplate: '<%= label %> - $ <%= value %>'}"
+                <canvas id="doughnut" class="chart chart-doughnut" chart-colors="colors"  chart-options="doughnutchartoption"
                         chart-data="sectorWiseData" chart-labels="sectorWiseLabels">
                 </canvas>
             </div>
@@ -158,10 +164,10 @@ Funds : <select chosen="{width:'600px'}" multiple ng-model="selectedFunds"
                 <br>
 
                 <p>
-                    <strong>Project Cost : </strong> {{selectedProject.projectCost | currency:selectedProject.currency+' '}}
+                    <strong>Project Cost : </strong> {{selectedProject.projectCost | currency:selectedProject.currency+' ':3}}{{'Cr'}}
                 </p>
                 <p>
-                    <strong>Released Amount: </strong> {{selectedProject.releasedAmount | currency:selectedProject.currency+' '}}
+                    <strong>Released Amount: </strong> {{selectedProject.releasedAmount | currency:selectedProject.currency+' ':3}}{{'Cr'}}
                 </p>
                 <p>
                     <strong>Direct Beneficiaries: </strong> {{selectedProject.directbenificieries }}
