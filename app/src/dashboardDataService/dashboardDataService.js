@@ -70,7 +70,7 @@ define(['angular', 'resources/resources', 'datatableParserService/datatableParse
                                 state.beneficiaries.direct += project.directbenificieries;
                                 state.beneficiaries.indirect += project.indirectbenificieries;
                                 state.projectDetails.push(project);
-                                state.amount_sanctioned += project.releasedAmount;
+                                state.amount_sanctioned += project.projectCost;
 
                             }
 
@@ -155,7 +155,7 @@ define(['angular', 'resources/resources', 'datatableParserService/datatableParse
                             state.beneficiaries.direct += project.directbenificieries;
                             state.beneficiaries.indirect += project.indirectbenificieries;
                             state.projectDetails.push(project);
-                            state.amount_sanctioned += parseFloat(project.releasedAmount);
+                            state.amount_sanctioned += parseFloat(project.projectCost);
 
                         }
 
