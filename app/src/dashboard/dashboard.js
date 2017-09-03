@@ -54,7 +54,9 @@ define(['angular', 'd3', 'angular-ui-router', 'resources/resources', 'datatableP
                 states: 0,
                 sanctioned: 0,
                 beneficiaries: 0,
-                decimals:3
+                decimals:3,
+                amountOfFundAgency:0,
+                amountReleasedByNabard:0
             };
             $scope.stats = angular.copy(_initStats);
 
@@ -65,20 +67,31 @@ define(['angular', 'd3', 'angular-ui-router', 'resources/resources', 'datatableP
             var _updateTopLevelStats = function (status) {
                 _resettats();
                 var totalAmount =0;
+                var amountOfAgency =0;
+                var releasedAmtByNabard =0;
                 for (var i = 0, x = $scope.stateData.length; i < x; i++) {
                     var sData = $scope.stateData[i];
                     $scope.stats.projects += sData.projects;
                     $scope.stats.states += 1;
                     $scope.stats.beneficiaries += sData.beneficiaries.total;
                     totalAmount += parseFloat(sData.amount_sanctioned);
+                    var sDataProjectDetails = sData.projectDetails;
+                    for(var j = 0, y = sDataProjectDetails.length; j < y; j++){
+                        amountOfAgency += parseFloat(sDataProjectDetails[j].amountOfFundingAgency);
+                        releasedAmtByNabard += parseFloat(sDataProjectDetails[j].releasedAmountByNabardToEE);
+                    }
 
                 }
                
                 if(status){
                 $scope.stats.sanctioned = parseFloat(totalAmount/dividend).toFixed(3);
-    
+                $scope.stats.amountOfFundAgency = parseFloat(amountOfAgency/dividend).toFixed(3);
+                $scope.stats.amountReleasedByNabard = parseFloat(releasedAmtByNabard/dividend).toFixed(3);
+
                 }else{
                 $scope.stats.sanctioned = totalAmount;
+                $scope.stats.amountOfFundAgency = amountOfAgency;
+                $scope.stats.amountReleasedByNabard = releasedAmtByNabard;
                 
                 _stateWiseDataMap = {};
                 var stateData = $scope.stateData;
@@ -86,11 +99,18 @@ define(['angular', 'd3', 'angular-ui-router', 'resources/resources', 'datatableP
                         var id = stateData[j].id.replace("IN-", '').toLowerCase();
                             var CurrentStateData = stateData[j];
                             var currentSanctionAmount = 0;
+                            var currentAmtFundAgency = 0;
+                            var currentReleasedAmtByNabard = 0;
                             CurrentStateData.projectDetails = stateData[j].projectDetails;
                              for(k=0, l= CurrentStateData.projectDetails.length; k < l; k++){
                             CurrentStateData.projectDetails[k].projectCost = parseFloat(CurrentStateData.projectDetails[k].projectCost).toFixed(3);
                             CurrentStateData.projectDetails[k].releasedAmount = parseFloat(CurrentStateData.projectDetails[k].releasedAmount).toFixed(3);
+                            CurrentStateData.projectDetails[k].sanctionedAmount = parseFloat(CurrentStateData.projectDetails[k].sanctionedAmount).toFixed(3);
+                            CurrentStateData.projectDetails[k].amountOfFundingAgency = parseFloat(CurrentStateData.projectDetails[k].amountOfFundingAgency).toFixed(3);
+                            CurrentStateData.projectDetails[k].releasedAmountByNabardToEE = parseFloat(CurrentStateData.projectDetails[k].releasedAmountByNabardToEE).toFixed(3);
                             currentSanctionAmount += parseFloat(CurrentStateData.projectDetails[k].projectCost);
+                            currentAmtFundAgency += parseFloat(CurrentStateData.projectDetails[k].amountOfFundingAgency);
+                            currentReleasedAmtByNabard += parseFloat(CurrentStateData.projectDetails[k].releasedAmountByNabardToEE);
                        }
                        CurrentStateData.amount_sanctioned = currentSanctionAmount;
                        _stateWiseDataMap[id] = CurrentStateData;
@@ -100,8 +120,8 @@ define(['angular', 'd3', 'angular-ui-router', 'resources/resources', 'datatableP
 
             var blues = ["#96D0DF", "#85BFCE", "#6Ea6BE", "#6199B1", "#5E8ca4", "#58748A"],
                 greens = ["#c7e9c0", "#a1d99b", "#74c476", "#41ab5d", "#238b45", "#006d2c", "#00441b"],
-                multiHues = ["#778899", "#4E4E56", "#778899", "#2E81CA", "#f48973","#f49fa9", "#82b3dd","#FFE39F", "#f791dd","#B3C9A2", "#93B8A2","#b5aa19","#427066", "#77A7A2", "#6097A1", "#4C84A0", "#c0f762", "#8e5f62", "#f2c7bc","#c7e9c0", "#74c476", "#41ab5d", "#238b45","#f2c7bc"],
-                multiHues2 = ["#FFE39F", "#D6D7A1", "#B3C9A2", "#93B8A2", "#77A7A2", "#6097A1", "#4C84A0", "#3A719E", "#2B5E9C", "#1F4B99"];
+                multiHues = ["#778899", "#006d2c", "#778899", "#1F4B99", "#f48973","#b5aa19", "#82b3dd","#FFE39F", "#f791dd","#B3C9A2", "#93B8A2","#f49fa9","#427066", "#77A7A2", "#6097A1", "#4C84A0", "#c0f762", "#8e5f62", "#f2c7bc","#ff0000", "#74c476", "#41ab5d", "#238b45","#f2c7bc"],
+                multiHues2 = ["#778899", "#f791dd", "#b5aa19", "#b5aa19", "#006d2c", "#6097A1", "#4C84A0", "#3A719E", "#2B5E9C", "#1F4B99"];
 
             var stateCodeMap = {"IN-AN": "Andaman and Nicobar Islands", "IN-AP": "Andhra Pradesh", "IN-AR": "Arunachal Pradesh", "IN-AS": "Assam", "IN-BR": "Bihar", "IN-CH": "Chandigarh", "IN-CT": "Chhattisgarh", "IN-DD": "Daman and Diu", "IN-DL": "Delhi", "IN-DN": "Dadra and Nagar Haveli", "IN-GA": "Goa", "IN-GJ": "Gujarat", "IN-HP": "Himachal Pradesh", "IN-HR": "Haryana", "IN-JH": "Jharkhand", "IN-JK": "Jammu and Kashmir", "IN-KA": "Karnataka", "IN-KL": "Kerala", "IN-LD": "Lakshadweep", "IN-MH": "Maharashtra", "IN-ML": "Meghalaya", "IN-MN": "Manipur", "IN-MP": "Madhya Pradesh", "IN-MZ": "Mizoram", "IN-NL": "Nagaland", "IN-OR": "Odisha", "IN-PB": "Punjab", "IN-PY": "Puducherry", "IN-RJ": "Rajasthan", "IN-SK": "Sikkim", "IN-TG": "Telangana", "IN-TN": "Tamil Nadu", "IN-TR": "Tripura", "IN-UP": "Uttar Pradesh", "IN-UT": "Uttarakhand", "IN-WB": "West Bengal"};
 
@@ -114,6 +134,8 @@ define(['angular', 'd3', 'angular-ui-router', 'resources/resources', 'datatableP
                     for (var i = 0, x = indianStates.length; i < x; i++) {
                         var stateData = indianStates[i];
                         var currentSanctionAmount = 0;
+                        var currentAmtFundAgency = 0;
+                        var currentReleasedAmtByNabard = 0;
                         var id = stateData.id.replace("IN-", '').toLowerCase();
                         
                         stateData.projectDetails = indianStates[i].projectDetails;
@@ -121,8 +143,13 @@ define(['angular', 'd3', 'angular-ui-router', 'resources/resources', 'datatableP
 
                             stateData.projectDetails[j].projectCost = parseFloat(stateData.projectDetails[j].projectCost/dividend).toFixed(3);
                             stateData.projectDetails[j].releasedAmount = parseFloat(stateData.projectDetails[j].releasedAmount /dividend).toFixed(3);
+                            stateData.projectDetails[j].sanctionedAmount = parseFloat(stateData.projectDetails[j].sanctionedAmount /dividend).toFixed(3);
+                            stateData.projectDetails[j].amountOfFundingAgency = parseFloat(stateData.projectDetails[j].amountOfFundingAgency /dividend).toFixed(3);
+                            stateData.projectDetails[j].releasedAmountByNabardToEE = parseFloat(stateData.projectDetails[j].releasedAmountByNabardToEE /dividend).toFixed(3);
                             currentSanctionAmount += parseFloat(stateData.projectDetails[j].projectCost);
-                       }
+                            currentAmtFundAgency += parseFloat(stateData.projectDetails[j].amountOfFundingAgency);
+                            currentReleasedAmtByNabard += parseFloat(stateData.projectDetails[j].releasedAmountByNabardToEE);
+                       }    
                        stateData.amount_sanctioned = currentSanctionAmount;
                       _stateWiseDataMap[id] = stateData;
                     }
@@ -412,7 +439,6 @@ define(['angular', 'd3', 'angular-ui-router', 'resources/resources', 'datatableP
                 var data = [];
                 for (var i = 0, x = stateData.length; i < x; i++) {
                     var state = stateData[i];
-                    console.log(state);
                     labels.push(state.name);
                     data.push(state.amount_sanctioned);
                 }

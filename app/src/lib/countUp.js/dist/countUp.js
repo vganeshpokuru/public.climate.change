@@ -79,17 +79,22 @@ var CountUp = function(target, startVal, endVal, decimals, duration, options) {
     self.formatNumber = function(nStr) {
         nStr = nStr.toFixed(self.decimals);
         nStr += '';
-        var x, x1, x2, rgx;
+        var x, x1, x2, x3, x4,rgx;
         x = nStr.split('.');
         x1 = x[0];
         x2 = x.length > 1 ? self.options.decimal + x[1] : '';
-        rgx = /(\d+)(\d{3})/;
+        x4 = x1.substring(x1.length-3);
+        x3 = x1.substring(0,x1.length-3);
+        if(x3 != ''){
+           x4 = ',' + x4;
+       }
+        rgx = /\B(?=(\d{2})+(?!\d))/g;
         if (self.options.useGrouping) {
-            while (rgx.test(x1)) {
-                x1 = x1.replace(rgx, '$1' + self.options.separator + '$2');
+            while (rgx.test(x3)) {
+                x3 = x3.replace(rgx, self.options.separator);
             }
         }
-        return self.options.prefix + x1 + x2 + self.options.suffix;
+        return x3 + x4 + x2;
     };
     // Robert Penner's easeOutExpo
     self.easeOutExpo = function(t, b, c, d) {
