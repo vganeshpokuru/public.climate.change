@@ -70,7 +70,7 @@ require([
         }]).run(['$http',function($http){
             //Authorization: Basic Y29uZmx1eDpwYXNzd29yZA==
             //Fineract-Platform-TenantId: default
-            $http.defaults.headers.common['Authorization'] = 'Basic Y29uZmx1eDpwYXNzd29yZA==';
+            $http.defaults.headers.common['Authorization'] = 'Basic cmVhZG9ubHk6UGFzc3dvcmRAQ2xpbWF0ZUNoYW5nZVJlYWRvbmx5';
             $http.defaults.headers.common['Fineract-Platform-TenantId'] = 'default';
 
         }]);
